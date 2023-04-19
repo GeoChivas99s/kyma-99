@@ -6,7 +6,6 @@ import {ROUTES} from '../constants';
 const Stack = createStackNavigator();
 
 function SettingsNavigator() {
-  console.log(Stack);
   return (
     <Stack.Navigator
       screenOptions={{
