@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
   },
   imageWrapper: {
     width: 100,
+    padding:5,
     height: 100,
+    borderRadius:50,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor:COLORS.primary
