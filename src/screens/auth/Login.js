@@ -19,20 +19,27 @@ export default function Login() {
     <View style={styles.container}>
       <View style={styles.formWrapper}>
         <View style={styles.imageWrapper}>
-          
           <Image style={styles.img} source={IMGS.logo} />
-        
         </View>
         <TextInput style={styles.formImput} placeholder="Email" />
         <TextInput style={styles.formImput} placeholder="Senha" />
 
-        <TouchableOpacity style={styles.buttonLogin}>
+        <TouchableOpacity
+          style={styles.buttonLogin}
+          onPress={() => navigation.navigate(ROUTES.HOME)}
+        >
           <Text style={styles.text}> Entrar</Text>
         </TouchableOpacity>
-        <Text style={{color:COLORS.primary}} >Esqueceu a senha?</Text>
+        <Text style={{ color: COLORS.primary }}>Esqueceu a senha?</Text>
       </View>
       <View style={styles.registerWrapper}>
-      <Text >Ainda não tem uma conta? <Text style={{color:COLORS.primary}}>Criar Conta</Text> </Text>
+        <TouchableOpacity 
+        onPress={()=>navigation.navigate(ROUTES.REGISTER)}>
+          <Text>
+            Ainda não tem uma conta?{" "}
+            <Text style={{ color: COLORS.primary }}>Criar Conta</Text>{" "}
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -42,19 +49,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
-  },textLogoRigth:{
-
-
-
   },
+  textLogoRigth: {},
   imageWrapper: {
     width: 100,
-    padding:5,
+    padding: 5,
     height: 100,
-    borderRadius:50,
+    borderRadius: 50,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor:COLORS.primary
+    backgroundColor: COLORS.primary,
   },
   img: {
     width: "100%",
@@ -71,7 +75,7 @@ const styles = StyleSheet.create({
     paddingStart: "5%",
   },
   formImput: {
-    width: "100%", 
+    width: "100%",
     padding: 10,
     height: 60,
     borderWidth: 1,
@@ -88,12 +92,12 @@ const styles = StyleSheet.create({
   },
   text: {
     color: COLORS.white,
-    fontSize:18
-  
-  }, registerWrapper:{
-      flex:1,
-      alignItems:"center",
-      justifyContent:"flex-end",
-      paddingBottom: "20%",
-  }
+    fontSize: 18,
+  },
+  registerWrapper: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "flex-end",
+    paddingBottom: "20%",
+  },
 });
