@@ -32,7 +32,7 @@ const Register = () => {
           placeholder="Email"
         />
         <TextInput style={styles.formImput} placeholder="Senha" />
-        <TextInput style={styles.formImput} placeholder="RepetirSenha" />
+        <TextInput style={styles.formImput} placeholder="Repetir Senha" />
 
         <TouchableOpacity
           style={styles.buttonLogin}
