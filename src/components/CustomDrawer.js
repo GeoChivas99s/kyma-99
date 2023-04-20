@@ -25,12 +25,12 @@ const CustomDrawer = props => {
       <View style={styles.drawerListWrapper}>
         <DrawerItemList {...props} />
       </View>
-      <View style={{position:"absolute",top:700, width:"100%"}} >
+      <View  >
         <TouchableOpacity  style={styles.exitButton}>
-          <Text style={{color:COLORS.white, marginRight:12, fontSize:16}}>
+          <Icon name='exit' color={COLORS.gray} size={20}/>
+          <Text style={{color:COLORS.gray, marginLeft:12, fontSize:16}}>
             Sair
           </Text>
-          <Icon name='exit' color={COLORS.white} size={20}/>
         </TouchableOpacity>
       </View>
     </DrawerContentScrollView>
@@ -54,13 +54,12 @@ const styles = StyleSheet.create({
     marginTop: 65,
   },exitButton:{
    flexDirection:"row",
-   width:"50%",
+   width:"90%",
    alignItems:"center",
-   justifyContent:"center",
-   padding:10,
+   justifyContent:"flex-start",
+   padding:5,
    marginLeft:15,
    borderRadius:5,
-   backgroundColor:COLORS.danger
-    
+  //  backgroundColor:COLORS.danger
   }
 });

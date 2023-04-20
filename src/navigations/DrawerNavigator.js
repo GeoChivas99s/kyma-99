@@ -35,9 +35,9 @@ function DrawerNavigator() {
         name={ROUTES.WALLET_DRAWER}
         component={Wallet}
         options={{
-          title: 'Wallet',
+          title: 'Chat',
           drawerIcon: ({focused, color, size}) => (
-            <Icon name="wallet" size={18} color={color} />
+            <Icon name="chatbubble" size={18} color={color} />
           ),
         }}
       />
