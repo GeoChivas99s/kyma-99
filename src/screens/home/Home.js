@@ -104,8 +104,9 @@ const Home = () => {
         <View style={styles.overlay}>
         </View>
         <View style={styles.bannerContent}>
-          <Text style={styles.bannerContentText}>Bem vindo ao seu assistente de terapia!</Text>
-          <Text style={styles.bannerContentText}>Kyma</Text>
+          <Text style={styles.bannerContentTitle}>Olá Geovane</Text>
+          <Text style={styles.bannerContentText} >Bem vindo ao seu assistente de terapia!</Text>
+
         </View>
       </View>
       <View style={styles.menuArea} >
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: COLORS.black,
-    opacity: 0.4,
+    opacity: 0.3,
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
@@ -154,15 +155,20 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
     borderRadius: 20,
-    top: 40,
+    top: 0,
     zIndex: 2,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "start",
     width: "100%",
     height: "100%",
+    padding: 15
   }, bannerContentText: {
     color: COLORS.white,
-    fontSize: 18
+    fontSize: 20
+  }, bannerContentTitle: {
+    color: COLORS.white,
+    fontSize: 24,
+    marginBottom: 10
   },
   menuArea: {
     flex: 2,
