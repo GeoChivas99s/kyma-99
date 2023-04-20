@@ -1,15 +1,72 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
-import { COLORS, IMGS, ROUTES } from '../../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { COLORS, IMGS, ROUTES } from '../../constants';
 import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 const menuOptions = [
+  {
+    name: "Diagnóstico",
+    icon: "body-outline",
+    color: "red",
+    route: ROUTES.HOME,
+    id: 1
+  },
+  {
+    name: "Gerador de texto",
+    icon: "document",
+    color: "red",
+    route: ROUTES.HOME,
+    id: 2
+  },
+  {
+    name: " Efeito Playback atrasado",
+    icon: "mic",
+    color: "red",
+    route: ROUTES.HOME,
+    id: 3
+  },
+  {
+    name: "Leitura assistida",
+    icon: "book",
+    color: "red",
+    route: ROUTES.HOME,
+    id: 4
+  },
+  {
+    name: "Terapia individual",
+    icon: "man",
+    color: "red",
+    route: ROUTES.HOME,
+    id: 5
+  },
+  {
+    name: "Terapia fonoaudiológica",
+    icon: "mic-circle",
+    color: "red",
+    route: ROUTES.HOME,
+    id: 6
+  },
   {
     name: "leitura",
     icon: "book",
     color: "red",
-    route: ROUTES.HOME
+    route: ROUTES.HOME,
+    id: 7
+  },
+  {
+    name: "Sobre Nós",
+    icon: "book",
+    color: "red",
+    route: ROUTES.HOME,
+    id: 8
+  },
+  {
+    name: "Sobre Nós",
+    icon: "book",
+    color: "red",
+    route: ROUTES.HOME,
+    id: 9
   }
 
 ];
@@ -29,13 +86,13 @@ const Home = () => {
 
   //   )
   // }
-  const MenuItem = () => {
+  const MenuItem = ({ name, icon }) => {
     return (
-      <View >
+      <View style={{ marginLeft: 3, marginBottom: 20 , alignItems:"center", width:"30%" }} >
         <TouchableOpacity style={styles.buttonWithIcon}>
-          <Icon name={"book"} size={30} color={COLORS.white} />
+          <Icon name={icon} size={30} color={COLORS.white} />
         </TouchableOpacity>
-        <Text>Sambapito</Text>
+        <Text style={{textAlign:"center"}}>{name}</Text>
       </View>
 
     )
@@ -51,19 +108,16 @@ const Home = () => {
           <Text style={styles.bannerContentText}>Kyma</Text>
         </View>
       </View>
-      <ScrollView style={styles.menuArea} alignItems="center">
-    
+      <View style={styles.menuArea} >
+        {
+          menuOptions.map(({ name, icon, id }) => {
+            return (
+              <MenuItem key={id} name={name} icon={icon} />
+            )
+          })
+        }
 
-
-        <MenuItem />
-        <MenuItem />
-        <MenuItem />
-        <MenuItem />
-        <MenuItem />
-        <MenuItem />
-        <MenuItem />
-
-      </ScrollView>
+      </View>
     </View>
   );
 };
@@ -77,7 +131,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   bannerWrapper: {
-    flex: 1/2,
+    flex: 1,
     width: "100%",
 
   }, img: {
@@ -106,14 +160,25 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   menuArea: {
-    flex: 3,
-    padding:45,
-    borderWidth: 3,
-    alignContent: "center",
+    flex: 2,
+    padding: 20,
+    paddingTop: 45,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderWidth: 2,
+    flexDirection: "row",
+    flexWrap: "wrap"
+
     // alignItems:"center"
   },
   buttonWithIcon: {
-    borderRadius: 50, padding: 20, justifyContent: "center", alignItems: "center", backgroundColor: COLORS.warning
+    width:70,
+    borderRadius: 50,
+    padding: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.warning
   }
 
 });
