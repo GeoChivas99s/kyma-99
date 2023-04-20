@@ -1,9 +1,9 @@
-import React from 'react';
+import React , {useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { COLORS, IMGS, ROUTES } from '../../constants';
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
-
+import Modal from "react-native-modal";
 const menuOptions = [
   {
     name: "Diagnóstico",
@@ -75,17 +75,11 @@ const menuOptions = [
 
 const Home = () => {
   const navigation = useNavigation();
-  // const MenuItem = ({ route, color, name, icon }) => {
-  //   return (
-  //     <View style={{borderWidth:4}}>
-  //       <TouchableOpacity onPress={() => navigation.navigate(route)}>
-  //         <Icon name={icon} size={50} color={COLORS.black} />
-  //         <Text>{name}</Text>
-  //       </TouchableOpacity>
-  //     </View>
+  const [isModalVisible, setModalVisible] = useState(false);
 
-  //   )
-  // }
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
   const MenuItem = ({ name, icon , color}) => {
     return (
       <View style={{ marginLeft: 3, marginBottom: 20, alignItems: "center", width: "30%" }} >
@@ -117,6 +111,7 @@ const Home = () => {
         </View>
       </View>
       <View style={styles.menuArea} >
+        
         {
           menuOptions.map(({ name, icon, id , color}) => {
             return (
@@ -124,6 +119,9 @@ const Home = () => {
             )
           })
         }
+    
+   
+    
 
       </View>
     </View>
