@@ -88,11 +88,11 @@ const Home = () => {
   // }
   const MenuItem = ({ name, icon }) => {
     return (
-      <View style={{ marginLeft: 3, marginBottom: 20 , alignItems:"center", width:"30%" }} >
+      <View style={{ marginLeft: 3, marginBottom: 20, alignItems: "center", width: "30%" }} >
         <TouchableOpacity style={styles.buttonWithIcon}>
           <Icon name={icon} size={30} color={COLORS.white} />
         </TouchableOpacity>
-        <Text style={{textAlign:"center"}}>{name}</Text>
+        <Text style={{ textAlign: "center" }}>{name}</Text>
       </View>
 
     )
@@ -127,30 +127,35 @@ export default Home;
 const styles = StyleSheet.create({
 
   container: {
-    borderWidth: 1,
-    flex: 1
+    flex: 1,
+    padding: 10
   },
   bannerWrapper: {
     flex: 1,
     width: "100%",
+    marginTop: "10%",
+    borderRadius: 20
 
   }, img: {
     width: "100%",
-    height: "100%"
+    height: "100%",
+    borderRadius: 20
+
   }, overlay: {
     width: "100%",
     height: "100%",
     backgroundColor: COLORS.black,
-    opacity: 0.7,
+    opacity: 0.4,
     position: "absolute",
     alignItems: "center",
-    justifyContent: "center"
-
+    justifyContent: "center",
+    borderRadius: 20
   }, bannerContent: {
     position: "absolute",
     alignSelf: "center",
+    borderRadius: 20,
     top: 40,
-    zIndex: 5,
+    zIndex: 2,
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
@@ -162,18 +167,17 @@ const styles = StyleSheet.create({
   menuArea: {
     flex: 2,
     padding: 20,
-    paddingTop: 45,
+    paddingTop: 10,
     width: "100%",
     alignItems: "center",
     justifyContent: "space-between",
-    borderWidth: 2,
     flexDirection: "row",
     flexWrap: "wrap"
 
     // alignItems:"center"
   },
   buttonWithIcon: {
-    width:70,
+    width: 70,
     borderRadius: 50,
     padding: 20,
     justifyContent: "center",
