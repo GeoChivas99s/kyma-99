@@ -8,63 +8,63 @@ const menuOptions = [
   {
     name: "Diagnóstico",
     icon: "body-outline",
-    color: "red",
+    color: COLORS.primary,
     route: ROUTES.HOME,
     id: 1
   },
   {
     name: "Gerador de texto",
     icon: "document",
-    color: "red",
+    color: COLORS.primary,
     route: ROUTES.HOME,
     id: 2
   },
   {
-    name: " Efeito Playback atrasado",
+    name: " Efeito Playback",
     icon: "mic",
-    color: "red",
+    color: COLORS.primary,
     route: ROUTES.HOME,
     id: 3
   },
   {
     name: "Leitura assistida",
     icon: "book",
-    color: "red",
+    color: COLORS.primary,
     route: ROUTES.HOME,
     id: 4
   },
   {
     name: "Terapia individual",
     icon: "man",
-    color: "red",
+    color: COLORS.primary,
     route: ROUTES.HOME,
     id: 5
   },
   {
     name: "Terapia fonoaudiológica",
     icon: "mic-circle",
-    color: "red",
+    color:COLORS.primary,
     route: ROUTES.HOME,
     id: 6
   },
   {
     name: "leitura",
     icon: "book",
-    color: "red",
+    color: COLORS.primary,
     route: ROUTES.HOME,
     id: 7
   },
   {
     name: "Sobre Nós",
     icon: "book",
-    color: "red",
+    color: COLORS.primary,
     route: ROUTES.HOME,
     id: 8
   },
   {
     name: "Sobre Nós",
     icon: "book",
-    color: "red",
+    color: COLORS.primary,
     route: ROUTES.HOME,
     id: 9
   }
@@ -86,10 +86,17 @@ const Home = () => {
 
   //   )
   // }
-  const MenuItem = ({ name, icon }) => {
+  const MenuItem = ({ name, icon , color}) => {
     return (
       <View style={{ marginLeft: 3, marginBottom: 20, alignItems: "center", width: "30%" }} >
-        <TouchableOpacity style={styles.buttonWithIcon}>
+        <TouchableOpacity style={{
+          width: 70,
+          borderRadius: 50,
+          padding: 20,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: color
+        }}>
           <Icon name={icon} size={30} color={COLORS.white} />
         </TouchableOpacity>
         <Text style={{ textAlign: "center" }}>{name}</Text>
@@ -100,7 +107,7 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <View style={styles.bannerWrapper}>
-        <Image style={styles.img} source={IMGS.banner} />
+        <Image style={styles.img} source={IMGS.bgPattern} />
         <View style={styles.overlay}>
         </View>
         <View style={styles.bannerContent}>
@@ -111,9 +118,9 @@ const Home = () => {
       </View>
       <View style={styles.menuArea} >
         {
-          menuOptions.map(({ name, icon, id }) => {
+          menuOptions.map(({ name, icon, id , color}) => {
             return (
-              <MenuItem key={id} name={name} icon={icon} />
+              <MenuItem key={id} name={name} icon={icon} color={color} />
             )
           })
         }
@@ -145,8 +152,8 @@ const styles = StyleSheet.create({
   }, overlay: {
     width: "100%",
     height: "100%",
-    backgroundColor: COLORS.black,
-    opacity: 0.3,
+    backgroundColor: COLORS.dark,
+    opacity: 0.4,
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
@@ -183,12 +190,7 @@ const styles = StyleSheet.create({
     // alignItems:"center"
   },
   buttonWithIcon: {
-    width: 70,
-    borderRadius: 50,
-    padding: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: COLORS.warning
+
   }
 
 });

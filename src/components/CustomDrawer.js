@@ -12,23 +12,25 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import { COLORS, IMGS } from '../constants';
+import { COLORS, IMGS, ROUTES } from '../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 const { width } = Dimensions.get('screen');
+import { useNavigation } from "@react-navigation/native";
 
 const CustomDrawer = props => {
+  const navigation = useNavigation();
   return (
     <DrawerContentScrollView {...props}>
-      <ImageBackground source={IMGS.banner} style={{ height: 140 }}>
+      <ImageBackground source={IMGS.bgPattern} style={{ height: 140 }}>
         <Image source={IMGS.user} style={styles.userImg} />
       </ImageBackground>
       <View style={styles.drawerListWrapper}>
         <DrawerItemList {...props} />
       </View>
       <View  >
-        <TouchableOpacity  style={styles.exitButton}>
-          <Icon name='exit' color={COLORS.gray} size={20}/>
-          <Text style={{color:COLORS.gray, marginLeft:12, fontSize:16}}>
+        <TouchableOpacity style={styles.exitButton} onPress={() => navigation.navigate(ROUTES.LOGIN)}>
+          <Icon name='exit' color={COLORS.gray} size={20} />
+          <Text style={{ color: COLORS.gray, marginLeft: 12, fontSize: 16 }}>
             Sair
           </Text>
         </TouchableOpacity>
@@ -52,14 +54,14 @@ const styles = StyleSheet.create({
   },
   drawerListWrapper: {
     marginTop: 65,
-  },exitButton:{
-   flexDirection:"row",
-   width:"90%",
-   alignItems:"center",
-   justifyContent:"flex-start",
-   padding:5,
-   marginLeft:15,
-   borderRadius:5,
-  //  backgroundColor:COLORS.danger
+  }, exitButton: {
+    flexDirection: "row",
+    width: "90%",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    padding: 5,
+    marginLeft: 15,
+    borderRadius: 5,
+    //  backgroundColor:COLORS.danger
   }
 });
