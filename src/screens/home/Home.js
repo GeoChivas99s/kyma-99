@@ -1,9 +1,10 @@
-import React , {useState} from 'react';
+import React, { Children, useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { COLORS, IMGS, ROUTES } from '../../constants';
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import Modal from "react-native-modal";
+import { Dimensions } from 'react-native';
 const menuOptions = [
   {
     name: "Diagnóstico",
@@ -43,7 +44,7 @@ const menuOptions = [
   {
     name: "Terapia fonoaudiológica",
     icon: "mic-circle",
-    color:COLORS.primary,
+    color: COLORS.primary,
     route: ROUTES.HOME,
     id: 6
   },
@@ -80,7 +81,7 @@ const Home = () => {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-  const MenuItem = ({ name, icon , color}) => {
+  const MenuItem = ({ name, icon, color }) => {
     return (
       <View style={{ marginLeft: 3, marginBottom: 20, alignItems: "center", width: "30%" }} >
         <TouchableOpacity style={{
@@ -111,19 +112,22 @@ const Home = () => {
         </View>
       </View>
       <View style={styles.menuArea} >
-        
+
         {
-          menuOptions.map(({ name, icon, id , color}) => {
+          menuOptions.map(({ name, icon, id, color }) => {
             return (
               <MenuItem key={id} name={name} icon={icon} color={color} />
             )
           })
         }
-    
-   
-    
+
+
+
 
       </View>
+      <WrapperComponent>
+        <Text>Olá bom dia</Text>
+      </WrapperComponent>
     </View>
   );
 };
@@ -192,3 +196,25 @@ const styles = StyleSheet.create({
   }
 
 });
+function WrapperComponent({ children }) {
+
+  return (
+    <View>
+      <Modal isVisible={true}
+        style={{ paddingTop: 25, paddingBottom: 10 }}
+      >
+        <View style={{ flex: 1, backgroundColor: COLORS.white,padding:5 , alignItems: "center", justifyContent: "center", borderWidth: 1, borderRadius: 15 }}>
+        <TouchableOpacity style={{alignSelf:"flex-end" , position:"absolute", top:5, right:10}}>
+          <Icon name='close' size={40} color={COLORS.gray}/>
+        </TouchableOpacity>
+          <View style={{borderBottomWidth:1 ,width:"100%" ,
+           borderColor:COLORS.grayLight ,position:"absolute", 
+           top:30, alignItems:"center", padding:5}}><Text style={{textTransform:"uppercase"}}> Gerador de texto</Text></View>
+          {
+            children
+          }
+        </View>
+      </Modal>
+    </View>
+  );
+}
