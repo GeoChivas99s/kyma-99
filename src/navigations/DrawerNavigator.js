@@ -5,7 +5,7 @@ import {Exercices, Notifications} from '../screens';
 import BottomTabNavigator from './BottomTabNavigator';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomDrawer from '../components/CustomDrawer';
-
+import ExcercicesNavigator from './ExcercicesNavigator';
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigator() {
@@ -33,7 +33,7 @@ function DrawerNavigator() {
 
       <Drawer.Screen
         name={ROUTES.TERAPY_DRAWER}
-        component={Exercices}
+        component={ExcercicesNavigator}
         options={{
           title: 'Exercícios',
           drawerIcon: ({focused, color, size}) => (

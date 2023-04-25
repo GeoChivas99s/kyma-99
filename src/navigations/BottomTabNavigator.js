@@ -3,6 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {StyleSheet, Platform, TouchableOpacity} from 'react-native';
 import {COLORS, ROUTES} from '../constants';
 import {Home, Exercices, Notifications, Settings} from '../screens';
+import ExcercicesNavigator from './ExcercicesNavigator';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SettingsNavigator from './SettingsNavigator';
 import CustomTabBarButton from '../components/CustomTabBarButton';
@@ -30,7 +31,7 @@ function BottomTabNavigator() {
             iconName = focused ? 'ios-home-sharp' : 'ios-home-outline';
           } else if (route.name === ROUTES.SETTINGS_NAVIGATOR) {
             iconName = focused ? 'settings' : 'settings-outline';
-          } else if (route.name === ROUTES.TERAPY) {
+          } else if (route.name === ROUTES.TERAPY_TAB) {
             iconName = focused ? 'man' : 'man-outline';
           } else if (route.name === ROUTES.NOTIFICATIONS) {
             iconName = focused
@@ -49,8 +50,8 @@ function BottomTabNavigator() {
         }}
       />
       <Tab.Screen
-        name={ROUTES.TERAPY}
-        component={Exercices}
+        name={ROUTES.TERAPY_TAB}
+        component={ExcercicesNavigator}
         options={{
           tabBarButton: props => <CustomTabBarButton {...props} />,
         }}

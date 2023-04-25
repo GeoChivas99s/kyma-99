@@ -9,6 +9,7 @@ export default {
 
   TERAPY: 'Terapy',
   TERAPY_DRAWER: 'Terapy Drawer',
+  TERAPY_TAB:' Terapy tab',
 
   NOTIFICATIONS: 'Notifications',
   NOTIFICATIONS_DRAWER: 'Notifications Drawer',
@@ -19,4 +20,7 @@ export default {
 
   SETTINGS_DETAIL: 'Settings Detail',
   PROFILE: 'My Profile',
+
+  EXERCICESELF: 'Exercice self',
+  EXERCICEPEOPLE: 'Exercice people',
 };

@@ -4,7 +4,7 @@ import { COLORS, IMGS, ROUTES } from '../../constants';
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import Modal from "react-native-modal";
-import { Dimensions } from 'react-native';
+
 const menuOptions = [
   {
     name: "Diagnóstico",
