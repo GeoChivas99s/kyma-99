@@ -23,10 +23,11 @@ const Wallet = () => {
 
         </View>
     
-      <View style={{flex:1, marginTop:-40, paddingLeft:10}}>
+      <View style={{flex:1, marginTop:-40, paddingLeft:20, paddingRight:20}}>
         <Text style={{textTransform:"uppercase", fontSize:18 ,color:COLORS.white}}>Terapias Individuais</Text>
-        <View>
-
+        <View style={{marginTop:150, borderWidth:1, padding:10, height:"50%", justifyContent:"space-between"}}>
+      <OptionCard title="Ensaiando em casa"  subtitle="" size="" color=""/>
+      <OptionCard/>
         </View>
       </View>
     </View>
@@ -34,3 +35,15 @@ const Wallet = () => {
 };
 
 export default Wallet;
+
+const OptionCard =({title , subtitle , size})=>{
+
+return (
+<View style={{backgroundColor:COLORS.grayLight, height:"48%"}}>
+  <Text>{title}</Text>
+  <Text>{subtitle}</Text>
+  <Text>{size}</Text>
+  
+</View>)
+
+}
