@@ -120,10 +120,6 @@ const Home = () => {
             )
           })
         }
-
-
-
-
       </View>
       <WrapperComponent>
         <Text>Olá bom dia</Text>
