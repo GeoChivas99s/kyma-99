@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Dimensions, ScrollView, Image } from 'react-native';
 import React from 'react';
-import { COLORS, IMGS, ROUTES } from '../../constants';
+import { COLORS, IMGS, ROUTES, DATA } from '../../constants';
 import Svg, { Path } from 'react-native-svg';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from "@react-navigation/native";
@@ -27,12 +27,19 @@ const ExerciceSelf = () => {
       </View>
 
       <View style={{ flex: 1, marginTop: -40, paddingLeft: 20, paddingRight: 20 }}>
-        <Text style={{ textTransform: "uppercase", fontSize: 18, color: COLORS.white }}>Terapias individual</Text>
+        <Text style={{ textTransform: "uppercase", fontSize: 18, color: COLORS.white }}>Terapia individual</Text>
         <View style={{ height: "90%" }}>
 
-          <ScrollView height="10%" style={{ marginTop: 110, padding: 10, borderWidth: 1 }} >
-            <Text>Polo</Text>
-            <MinCard />
+          <ScrollView  style={{ marginTop: 110, padding: 5, }} justifyContent="space-between" >
+            {
+              DATA.map((item) => {
+                return (
+
+                  <MinCard data={item} />
+                )
+
+              })
+            }
           </ScrollView>
 
         </View>
@@ -46,11 +53,20 @@ export default ExerciceSelf;
 const styles = StyleSheet.create({});
 
 
-const MinCard = () => {
+const MinCard = ({ data }) => {
+  const { id, img, title } = data
   return (
-    <View style={{ borderWidth: 1, height: 100, borderRadius: 5, flexDirection: "row", alignItems: "center", padding: 5 }}>
+    <View style={{
+      borderWidth: 1,
+      height: 100, borderRadius: 5,
+      flexDirection: "row",
+      alignItems: "center", padding: 5,
+      backgroundColor: COLORS.primary,
+      borderColor: COLORS.primary,
+      marginBottom:10
+    }}>
       <View style={{ width: "30%" }}>
-        <Image source={IMGS.step1} style={{ width: "100%", borderRadius: 5, height: "100%" }} />
+        <Image source={img} style={{ width: "100%", borderRadius: 5, height: "100%" }} />
         <View style={{
           width: "100%",
           height: "100%",
@@ -61,11 +77,11 @@ const MinCard = () => {
           justifyContent: "center",
           borderRadius: 5
         }}>
-          <Text style={{ color: "white", fontSize: 50 }}>81</Text>
+          <Text style={{ color: "white", fontSize: 50 }}>{id}</Text>
         </View>
       </View>
       <View style={{ width: "70%", padding: 15 }}>
-        <Text>Análise de TExto</Text>
+        <Text style={{ fontSize: 16, color: COLORS.white }}>{title}</Text>
       </View>
     </View>
   )
