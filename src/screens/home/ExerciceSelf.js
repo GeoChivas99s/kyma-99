@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ScrollView, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { COLORS, IMGS, ROUTES, DATA } from '../../constants';
 import Svg, { Path } from 'react-native-svg';
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({});
 const MinCard = ({ data }) => {
   const { id, img, title } = data
   return (
-    <View style={{
+    <TouchableOpacity style={{
       borderWidth: 1,
       height: 100, borderRadius: 5,
       flexDirection: "row",
@@ -71,7 +71,7 @@ const MinCard = ({ data }) => {
           width: "100%",
           height: "100%",
           backgroundColor: COLORS.dark,
-          opacity: 0.6,
+          opacity: 0.3,
           position: "absolute",
           alignItems: "center",
           justifyContent: "center",
@@ -83,6 +83,6 @@ const MinCard = ({ data }) => {
       <View style={{ width: "70%", padding: 15 }}>
         <Text style={{ fontSize: 16, color: COLORS.white }}>{title}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }

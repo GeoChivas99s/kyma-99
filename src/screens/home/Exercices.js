@@ -4,7 +4,7 @@ import { COLORS, ROUTES } from '../../constants';
 import Svg, { Path } from 'react-native-svg';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from "@react-navigation/native";
-
+import ExerciceDialog from '../dialogs/ExerciceDialog';
 const Wallet = () => {
   return (
     <View
@@ -30,10 +30,11 @@ const Wallet = () => {
         <Text style={{ textTransform: "uppercase", fontSize: 18, color: COLORS.white }}>Terapias</Text>
         <View style={{ marginTop: 110, padding: 10, height: "55%", justifyContent: "space-between" }}>
           <OptionCard title="Ensaiando em casa" subtitle="Exercícios individuais" size="9" color="#47A082" path={ROUTES.EXERCICESELF} />
-          <OptionCard title="Falando em público" subtitle="Exercícios com ajuda externa" size="5" color="#47A082" path={ROUTES.EXERCICEPEOPLE} />
+          <OptionCard title="Ensaiando em público" subtitle="Exercícios com ajuda externa" size="5" color="#47A082" path={ROUTES.EXERCICEPEOPLE} />
 
         </View>
       </View>
+      <ExerciceDialog />
     </View>
   );
 };
