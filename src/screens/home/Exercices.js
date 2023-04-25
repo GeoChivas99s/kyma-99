@@ -85,7 +85,7 @@ const OptionCard = ({ title, subtitle, size, color, path }) => {
           backgroundColor: COLORS.primary
         }}
           onPress={() => navigation.navigate(path)}>
-          <Text style={{ color: "white" }}>Ver <Icon name="arrow-forward" /></Text>
+          <Text style={{ color: "white", fontSize: 18 }}>Ver <Icon name="arrow-forward" /></Text>
         </TouchableOpacity>
         <Text >Qtd:{size}</Text>
       </View>
