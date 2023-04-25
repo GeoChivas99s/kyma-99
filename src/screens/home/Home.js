@@ -196,7 +196,7 @@ function WrapperComponent({ children }) {
 
   return (
     <View>
-      <Modal isVisible={true}
+      <Modal isVisible={false}
         style={{ paddingTop: 25, paddingBottom: 10 }}
       >
         <View style={{ flex: 1, backgroundColor: COLORS.white,padding:5 , alignItems: "center", justifyContent: "center", borderWidth: 1, borderRadius: 15 }}>
