@@ -27,7 +27,7 @@ const Wallet = () => {
       </View>
 
       <View style={{ flex: 1, marginTop: -40, paddingLeft: 20, paddingRight: 20 }}>
-        <Text style={{ textTransform: "uppercase", fontSize: 18, color: COLORS.white }}>Terapias Individuais</Text>
+        <Text style={{ textTransform: "uppercase", fontSize: 18, color: COLORS.white }}>Terapias</Text>
         <View style={{ marginTop: 110, padding: 10, height: "55%", justifyContent: "space-between" }}>
           <OptionCard title="Ensaiando em casa" subtitle="Exercícios individuais" size="9" color="#47A082" path={ROUTES.EXERCICESELF} />
           <OptionCard title="Falando em público" subtitle="Exercícios com ajuda externa" size="5" color="#47A082" path={ROUTES.EXERCICEPEOPLE} />
