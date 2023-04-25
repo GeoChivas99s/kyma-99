@@ -9,7 +9,7 @@ const Wallet = () => {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: COLORS.bgColor,
+      //  backgroundColor: COLORS.grayLight,
       }}>
       <Text>Wallet!</Text>
     </View>

@@ -7,8 +7,8 @@ export default {
   HOME_TAB: 'Home Tab',
   HOME_DRAWER: 'Home Drawer',
 
-  WALLET: 'Wallet',
-  WALLET_DRAWER: 'Wallet Drawer',
+  TERAPY: 'Terapy',
+  TERAPY_DRAWER: 'Terapy Drawer',
 
   NOTIFICATIONS: 'Notifications',
   NOTIFICATIONS_DRAWER: 'Notifications Drawer',

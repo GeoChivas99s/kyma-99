@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {StyleSheet, Platform, TouchableOpacity} from 'react-native';
 import {COLORS, ROUTES} from '../constants';
-import {Home, Wallet, Notifications, Settings} from '../screens';
+import {Home, Exercices, Notifications, Settings} from '../screens';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SettingsNavigator from './SettingsNavigator';
 import CustomTabBarButton from '../components/CustomTabBarButton';
@@ -30,8 +30,8 @@ function BottomTabNavigator() {
             iconName = focused ? 'ios-home-sharp' : 'ios-home-outline';
           } else if (route.name === ROUTES.SETTINGS_NAVIGATOR) {
             iconName = focused ? 'settings' : 'settings-outline';
-          } else if (route.name === ROUTES.WALLET) {
-            iconName = focused ? 'wallet' : 'wallet-outline';
+          } else if (route.name === ROUTES.TERAPY) {
+            iconName = focused ? 'man' : 'man-outline';
           } else if (route.name === ROUTES.NOTIFICATIONS) {
             iconName = focused
               ? 'md-notifications-sharp'
@@ -49,8 +49,8 @@ function BottomTabNavigator() {
         }}
       />
       <Tab.Screen
-        name={ROUTES.WALLET}
-        component={Wallet}
+        name={ROUTES.TERAPY}
+        component={Exercices}
         options={{
           tabBarButton: props => <CustomTabBarButton {...props} />,
         }}

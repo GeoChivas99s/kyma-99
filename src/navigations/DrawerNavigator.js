@@ -1,7 +1,7 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {COLORS, ROUTES} from '../constants';
-import {Wallet, Notifications} from '../screens';
+import {Exercices, Notifications} from '../screens';
 import BottomTabNavigator from './BottomTabNavigator';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomDrawer from '../components/CustomDrawer';
@@ -32,12 +32,12 @@ function DrawerNavigator() {
       />
 
       <Drawer.Screen
-        name={ROUTES.WALLET_DRAWER}
-        component={Wallet}
+        name={ROUTES.TERAPY_DRAWER}
+        component={Exercices}
         options={{
-          title: 'Chat',
+          title: 'Exercícios',
           drawerIcon: ({focused, color, size}) => (
-            <Icon name="chatbubble" size={18} color={color} />
+            <Icon name="man" size={18} color={color} />
           ),
         }}
       />
