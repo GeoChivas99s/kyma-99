@@ -12,7 +12,7 @@ function ExcercicesNavigator() {
         headerShown: false,
       }}
       initialRouteName={ROUTES.LOGIN}>
-      <Stack.Screen name={ROUTES.TERAPY_TAB} component={Exercices} />
+      <Stack.Screen name={ROUTES.TERAPY} component={Exercices} />
       <Stack.Screen name={ROUTES.EXERCICESELF} component={ExerciceSelf} />
       <Stack.Screen name={ROUTES.EXERCICEPEOPLE} component={ExecercicePeople} />
     </Stack.Navigator>

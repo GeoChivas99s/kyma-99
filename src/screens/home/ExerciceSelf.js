@@ -28,14 +28,14 @@ const ExerciceSelf = () => {
 
       <View style={{ flex: 1, marginTop: -40, paddingLeft: 20, paddingRight: 20 }}>
         <Text style={{ textTransform: "uppercase", fontSize: 18, color: COLORS.white }}>Terapia individual</Text>
-        <View style={{ height: "90%" }}>
+        <View style={{ height: "85%" }}>
 
-          <ScrollView  style={{ marginTop: 110, padding: 5, }} justifyContent="space-between" >
+          <ScrollView  style={{ marginTop: 100, padding: 5, }} justifyContent="space-between" >
             {
               DATA.map((item) => {
                 return (
 
-                  <MinCard data={item} />
+                  <MinCard key={item.id} data={item} />
                 )
 
               })
