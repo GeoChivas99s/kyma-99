@@ -5,7 +5,7 @@ import Svg, { Path } from 'react-native-svg';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from "@react-navigation/native";
 
-const Wallet = () => {
+const Exercice = () => {
   return (
     <View
       style={{
@@ -39,7 +39,7 @@ const Wallet = () => {
   );
 };
 
-export default Wallet;
+export default Exercice;
 
 const OptionCard = ({ title, subtitle, size, color, path }) => {
   const navigation = useNavigation();

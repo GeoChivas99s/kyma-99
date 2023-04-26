@@ -10,7 +10,7 @@ const menuOptions = [
     name: "Diagnóstico",
     icon: "body-outline",
     color: COLORS.primary,
-    route: ROUTES.HOME,
+    route: ROUTES.DIAGNOSTIC,
     id: 1
   },
   {
@@ -81,10 +81,12 @@ const Home = () => {
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-  const MenuItem = ({ name, icon, color }) => {
+  const MenuItem = ({ name, icon, color , route }) => {
     return (
       <View style={{ marginLeft: 3, marginBottom: 20, alignItems: "center", width: "30%" }} >
-        <TouchableOpacity style={{
+        <TouchableOpacity
+        onPress={()=>navigation.navigate(route)}
+        style={{
           width: 70,
           borderRadius: 50,
           padding: 20,
@@ -114,9 +116,9 @@ const Home = () => {
       <View style={styles.menuArea} >
 
         {
-          menuOptions.map(({ name, icon, id, color }) => {
+          menuOptions.map(({ name, icon, id, color, route }) => {
             return (
-              <MenuItem key={id} name={name} icon={icon} color={color} />
+              <MenuItem key={id} name={name} icon={icon} route={route} color={color} />
             )
           })
         }

@@ -9,7 +9,7 @@ import SettingsNavigator from './SettingsNavigator';
 import CustomTabBarButton from '../components/CustomTabBarButton';
 import CustomTabBar from '../components/CustomTabBar';
 import {useNavigation} from '@react-navigation/native';
-
+import HomeNatigator from './HomeNatigator';
 const Tab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
@@ -44,7 +44,7 @@ function BottomTabNavigator() {
       })}>
       <Tab.Screen
         name={ROUTES.HOME_TAB}
-        component={Home}
+        component={HomeNatigator}
         options={{
           tabBarButton: props => <CustomTabBarButton route="home" {...props} />,
         }}

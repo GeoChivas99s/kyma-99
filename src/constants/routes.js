@@ -7,9 +7,12 @@ export default {
   HOME_TAB: 'Home Tab',
   HOME_DRAWER: 'Home Drawer',
 
+  HOME_PAGE: 'Home page',
+  DIAGNOSTIC: 'Diagnostic',
+
   TERAPY: 'Terapy',
   TERAPY_DRAWER: 'Terapy Drawer',
-  TERAPY_TAB:' Terapy tab',
+  TERAPY_TAB: ' Terapy tab',
 
   NOTIFICATIONS: 'Notifications',
   NOTIFICATIONS_DRAWER: 'Notifications Drawer',
