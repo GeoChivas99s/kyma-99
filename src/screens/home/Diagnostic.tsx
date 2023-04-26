@@ -1,5 +1,5 @@
-import { useState, Text, View, Dimensions, TouchableOpacity } from 'react-native';
-import React from 'react';
+import { Text, View, Dimensions, TouchableOpacity } from 'react-native';
+import React, { useEffect ,useState} from 'react';
 import { COLORS, ROUTES } from '../../constants';
 import Svg, { Path } from 'react-native-svg';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -7,7 +7,7 @@ import {  InterruptionModeIOS, InterruptionModeAndroid } from 'expo-av';
 import { Audio } from "expo-av";
 
 const Diagnostic = () => {
-    const [recording, setRecording] = useState();
+    const [recording, setRecording] = useState<any>();
     const [recordings, setRecordings] = useState([]);
     const [message, setMessage] = useState("");
 
@@ -179,14 +179,13 @@ function getRecordLines() {
                 <Text style={{ textTransform: "uppercase", fontSize: 18, color: COLORS.white }}>Diagnóstico</Text>
                 <View style={{ marginTop: 110, padding: 10, height: "55%", justifyContent: "center", alignItems: "center" }}>
                     <TouchableOpacity
-            onPress={recording ? stopRecording : startRecording}
-                    
-                    style={{
+                     onPress={recording ? stopRecording : startRecording}
+                      style={{
                         borderWidth: 1,
                         padding: 10,
                         height: 150,
                         width: 150,
-                        borderRadius: "100%",
+                        borderRadius: 100,
                         alignItems: "center"
                         , justifyContent: "center",
                         backgroundColor: COLORS.primary

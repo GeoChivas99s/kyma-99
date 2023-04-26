@@ -13,7 +13,11 @@
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
+    "@types/react": "^18.2.0",
+    "@types/react-native": "^0.71.6",
     "expo": "~48.0.11",
+    "expo-av": "~13.2.1",
+    "expo-file-system": "~15.2.2",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
     "react-native": "0.71.6",
@@ -26,11 +30,11 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg": "13.4.0",
     "react-native-vector-icons": "^9.2.0",
-    "expo-file-system": "~15.2.2",
-    "expo-av": "~13.2.1"
+    "typescript": "^5.0.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@types/react-native-vector-icons": "^6.4.13"
   },
   "private": true
 }
