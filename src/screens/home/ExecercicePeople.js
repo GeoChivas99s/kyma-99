@@ -7,11 +7,11 @@ import useData from '../../hooks/useData';
 
 const ExecercicePeople = () => {
 
-  const { 
+  const {
     setOpenModal,
     setData,
     data
-   } = useData();
+  } = useData();
 
   return (
     <View
@@ -39,7 +39,7 @@ const ExecercicePeople = () => {
             {
               DATA.data2.map((item) => {
                 return (
-                  <MinCard key={item.id} data={item} handleClick={ ()=> {setOpenModal(prev=>!prev); setData(item)} }/>
+                  <MinCard key={item.id} data={item} handleClick={() => { setOpenModal(prev => !prev); setData(item) }} />
                 )
               })
             }
@@ -56,11 +56,11 @@ export default ExecercicePeople;
 const styles = StyleSheet.create({});
 
 
-const MinCard = ({ data,handleClick }) => {
+const MinCard = ({ data, handleClick }) => {
   const { id, img, title } = data
   return (
     <TouchableOpacity
-    onPress={handleClick}
+      onPress={handleClick}
       style={{
         borderWidth: 1,
         height: 100, borderRadius: 5,
@@ -71,10 +71,12 @@ const MinCard = ({ data,handleClick }) => {
         marginBottom: 10
       }}>
       <View style={{ width: "30%" }}>
-        <Image source={img} 
-        style={{ width: "100%", 
-        borderRadius: 5, 
-        height: "100%" }} />
+        <Image source={img}
+          style={{
+            width: "100%",
+            borderRadius: 5,
+            height: "100%"
+          }} />
 
         <View style={{
           width: "100%",
