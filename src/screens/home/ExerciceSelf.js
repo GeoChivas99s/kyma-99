@@ -37,7 +37,7 @@ const ExerciceSelf = () => {
         <View style={{ height: "85%" }}>
           <ScrollView style={{ marginTop: 100, padding: 5, }} justifyContent="space-between" >
             {
-              DATA.map((item) => {
+              DATA.data.map((item) => {
                 return (
                   <MinCard key={item.id} data={item} handleClick={ ()=> {setOpenModal(prev=>!prev); setData(item)} }/>
                 )

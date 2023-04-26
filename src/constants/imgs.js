@@ -13,5 +13,10 @@ export default {
   step8: require('../assets/Step-8.jpg.jpeg'),
   step9: require('../assets/Step-9.jpg.jpeg'),
   step10V2: require('../assets/Step-10-V2.jpg.jpeg'),
+  step11V2: require('../assets/Step-11-V2.jpg.jpeg'),
+  step12V2: require('../assets/Step-12-V2.jpg.jpeg'),
+  step13V2: require('../assets/Step-13-V2.jpg.jpeg'),
+  step14V2: require('../assets/Step-14-V2.jpg.jpeg'),
+  step15V2: require('../assets/Step-15-V2.jpg.jpeg'),
 
 };

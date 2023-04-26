@@ -1,5 +1,53 @@
 import imgs from "./imgs";
 
+const data2 = [
+    {
+        img: imgs.step10V2,
+        title: "Deixe claro que você gagueja quando for conversar com alguém",
+        description: `Muitas pessoas que gaguejam ficam constrangidas por causa do problema e, às vezes, tentam disfarçar. No entanto, isso só aumenta a ansiedade — e, por consequência, a gagueira em si. Sendo assim, comece a contar aos outros que você é gago de vez em quando para controlar melhor as situações.`,
+        steps: `Diga algo simples, como "Por favor, ignore se eu falar devagar. Eu gaguejo". A maioria das pessoas respeita essa situação.`,
+        id: 1
+    },
+    {
+        img: imgs.step11V2,
+        title: "Visualize e planeje as suas interações sociais.",
+        description: `Planeje as suas interações sociais enquanto tenta superar a gagueira. Assim, você vai reduzir a ansiedade de falar em público e de usar certos termos.`,
+        steps: `Por exemplo: se você tem uma reunião de trabalho amanhã, estude o cronograma com atenção. Tente antever as perguntas a que vai ter que responder e o que vai dizer. Prepare uma lista de respostas e temas para reduzir a ansiedade. Nem sempre é possível planejar as interações sociais e você pode acabar gaguejando quando a conversa tomar um rumo inesperado. Nesse caso, vá com calma e visualize as palavras antes de falar para manter a compostura.`,
+        id: 2
+    },
+    {
+        img: imgs.step12V2,
+        title: "Evite os termos que causam a gagueira.",
+        description: `Durante os seus ensaios, você provavelmente vai identificar palavras, sons e frases que causam a gagueira. Com o tempo, vai ser mais fácil usar esses termos normalmente. Até lá, talvez seja melhor evitá-los em situações públicas`,
+        steps: `Faça uma lista de sinônimos para esses termos. Se uma palavra específica causa a sua gagueira, pesquise outras, que tenham o mesmo significado. Use um glossário ou o dicionário para nunca ter que ficar sem saber o que dizer.`,
+        id: 3
+    },
+    {
+        img: imgs.step13V2,
+        title: "Faça contato visual com todo mundo com quem você for conversar.",
+        description: `Muitas vezes, as pessoas quebram o contato visual com as outras quando começam a gaguejar, seja por ansiedade ou constrangimento. Entretanto, force-se a olhar para os outros mesmo se o problema surgir para demonstrar confiança e ficar cada vez mais tranquilo.`,
+        steps: `Se você acabar desfazendo esse contato, tente retomá-lo assim que a gagueira diminuir`,
+        id: 4
+    },
+    {
+        img: imgs.step14V2,
+        title: "Gesticule com as mãos. ",
+        description: `Às vezes, a gagueira é causada por um surto de energia nervosa que passa descontrolada pelo corpo. Por sorte, dá para limitar o problema mexendo as mãos, já que o cérebro fica distraído por um tempo.`,
+        steps: `Essa técnica é ainda melhor durante apresentações de trabalho em público. Na hora de planejar a sua fala, pense também em possíveis gestos que ajudem a controlar a gagueira e anote-os no seu roteiro em papel.`,
+        id: 5
+    },
+    {
+        img: imgs.step15V2,
+        title: "Puxe papo com pessoas aleatórias.",
+        description: `Esse é um ótimo teste para saber se os exercícios estão surtindo efeito. Como não dá para antever conversas aleatórias, elas acabam sendo um belo termômetro.`,
+        steps: `Comece o papo se apresentando e dizendo "Eu gaguejo e estou tentando melhorar". Qualquer pessoa decente vai se empenhar em ajudar. Você também pode pedir orientações de direção. Mesmo que já conheça o caminho, pelo menos vai interagir com os outros sem investir tanto tempo em uma conversa longa`,
+        id: 6
+    },
+
+
+];
+
+
 
 const data = [
     {
@@ -68,4 +116,4 @@ const data = [
     }
 ];
 
-export default data;
+export default {data , data2};
