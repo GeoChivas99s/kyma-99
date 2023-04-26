@@ -3,6 +3,7 @@ import React, { useEffect ,useState} from 'react';
 import { COLORS, ROUTES } from '../../constants';
 import Svg, { Path } from 'react-native-svg';
 import Icon from 'react-native-vector-icons/Ionicons';
+import * as FileSystem from "expo-file-system";
 import {  InterruptionModeIOS, InterruptionModeAndroid } from 'expo-av';
 import { Audio } from "expo-av";
 
