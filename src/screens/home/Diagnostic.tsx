@@ -1,17 +1,24 @@
-import { Text, View, Dimensions, TouchableOpacity } from "react-native";
-import React, { useEffect, useState } from "react";
-import { COLORS, ROUTES } from "../../constants";
-import Svg, { Path } from "react-native-svg";
-import Icon from "react-native-vector-icons/Ionicons";
-import * as FileSystem from "expo-file-system";
-import { InterruptionModeIOS, InterruptionModeAndroid } from "expo-av";
+import {
+  Text,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { Audio } from "expo-av";
+import Svg, { Path } from "react-native-svg";
+import * as FileSystem from "expo-file-system";
+import { COLORS, ROUTES } from "../../constants";
+import Icon from "react-native-vector-icons/Ionicons";
+import React, { useCallback, useEffect, useState } from "react";
+import { InterruptionModeIOS, InterruptionModeAndroid } from "expo-av";
 
 const Diagnostic = () => {
+  const [message, setMessage] = useState("");
   const [recording, setRecording] = useState<any>();
   const [recordings, setRecordings] = useState([]);
-  const [message, setMessage] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
+  
   const RECORDING_OPTIONS = {
     android: {
       extension: ".m4a",
@@ -53,9 +60,6 @@ const Diagnostic = () => {
     console.log("Stopping recording..");
     setRecording(undefined);
     await recording.stopAndUnloadAsync();
-    // await Audio.setAudioModeAsync({
-    //   allowsRecordingIOS: false,
-    // });
     const uri = recording.getURI();
     // const { sound, status } = await recording.createNewLoadedSoundAsync();
     const base64File = await FileSystem.readAsStringAsync(uri, {
@@ -63,27 +67,18 @@ const Diagnostic = () => {
     });
     await FileSystem.deleteAsync(uri);
 
-    generateText(base64File);
+    //generateText(base64File);
 
     let records: any = [...recordings];
     records.push({
-      uri: uri,
-      //  sound: sound,
-      // duration: getDurationFormated(status.durationMillis),
+      uri: base64File,
     });
 
     setRecordings(records);
-    // console.log("::::", uri);
   }
 
   const generateText = (base64File: string) => {
-    //     const fileExists = await FileSystem.getInfoAsync(uri)
-    //  if(fileExists){
-    //   console.log("aaaa", fileExists)
-    //  }
-
-    // const { uri } = await FileSystem.getInfoAsync(url);
-
+    setIsLoading(true);
     fetch(
       `https://speech.googleapis.com/v1/speech:recognize?key=AIzaSyAqQmsS_dftAWEeWh4e9NS2NmBKlATz5LE`,
       {
@@ -102,11 +97,25 @@ const Diagnostic = () => {
     )
       .then((response) => response.json())
       .then((data) => {
+        setMessage(data.results[0].alternatives[0].transcript);
         console.log(data.results[0].alternatives[0].transcript);
       })
-      .catch((error) => console.log(error))
-      .finally(() => console.log("Foii!!"));
+      .catch((error) => {
+        console.log(error);
+        setMessage("");
+      })
+      .finally(() => {
+        console.log("Foii!!");
+        setIsLoading(false);
+      });
   };
+
+  useCallback(() => {}, [message]);
+
+  useEffect(() => {
+    if (message) {
+    }
+  }, [message]);
 
   useEffect(() => {
     Audio.requestPermissionsAsync().then((granted) => {
@@ -132,34 +141,46 @@ const Diagnostic = () => {
           style={{
             borderWidth: 1,
             width: "100%",
-            flexDirection: "row",
-            justifyContent:"space-between",
+            flexDirection: "column",
+            justifyContent: "space-between",
             alignItems: "center",
-            padding:10,
-            backgroundColor:COLORS.primary,
-            borderRadius:10
+            padding: 10,
+            backgroundColor: COLORS.primary,
+            borderRadius: 10,
           }}
         >
-          <Text style={{color:"white"}}>
-            Audio {index + 1} {/* {recordingLine.duration} */}
+          <Text style={{ color: "white", marginBottom: 10 }}>
+            GRAVAÇÃO 0{index + 1} {/* {recordingLine.duration} */}
           </Text>
           <TouchableOpacity
             style={{
-              width: 150,
+              width: "100%",
               borderWidth: 2,
               height: 90,
-              backgroundColor: COLORS.white,
-              padding:10,
-              alignItems:"center",
-              justifyContent:"center",
-              borderRadius:10
+              backgroundColor: "#47A082",
+              padding: 10,
+              alignItems: "center",
+              justifyContent: "center",
+              borderColor: "#47A082",
+              borderRadius: 10,
             }}
             onPress={() => {
               //  recordingLine.sound.playAsync();
               generateText(recordingLine.uri);
             }}
           >
-            <Text>Enviar</Text>
+            {isLoading ? (
+              <ActivityIndicator size="large" color={COLORS.white} />
+            ) : (
+              <>
+                <Icon name="arrow-up" color={COLORS.white} size={20} />
+                <Text
+                  style={{ color: COLORS.white, textTransform: "uppercase" }}
+                >
+                  Enviar áudio para análise{" "}
+                </Text>
+              </>
+            )}
           </TouchableOpacity>
         </View>
       );
@@ -208,7 +229,7 @@ const Diagnostic = () => {
         <View
           style={{
             marginTop: 10,
-         //   borderWidth: 3,
+            //   borderWidth: 3,
             padding: 10,
             height: "80%",
             justifyContent: "center",
@@ -226,6 +247,7 @@ const Diagnostic = () => {
               alignItems: "center",
               justifyContent: "center",
               backgroundColor: COLORS.primary,
+              marginBottom: 60,
             }}
           >
             <Icon
