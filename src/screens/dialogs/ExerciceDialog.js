@@ -6,18 +6,29 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'rea
 import KymaModal from '../../components/KymaModal';
 
 
-const ExerciceDialog= ({handleClose , isOpen , title , data }) => {
+const ExerciceDialog = ({ title, data }) => {
 
+    return (
+        <KymaModal title={title} >
+            <View style={{ width:"100%", height:"90%",marginTop:30}}>
 
-const [isOpened , setIsOpened] = useState(isOpen);
- console.log("data", data)
+                <View style={{ flex: 1, width: "100%" , padding:10}}>
+                    <Image source={data.img} style={{
+                        width: "100%",
+                        borderRadius: 5,
+                        height: "100%"
+                    }} />
+                </View>
 
-return (
-    <KymaModal isOpen={isOpened}  handleClose={()=> setIsOpened(false)} title={title} >
+                <View style={{ flex: 2,  width: "100%", padding:10}}>
+                    <Text style={{fontSize:24,marginBottom:10 }}>{data.title}</Text>
+                    <Text style={{marginBottom:15, fontSize:18}}>1. {data.description}</Text>
+                    <Text style={{fontSize:16}}>{data.steps}</Text>
+                </View>
 
-        <Text>slsls</Text>
-    </KymaModal>
-)
+            </View>
+        </KymaModal>
+    )
 
 
 }

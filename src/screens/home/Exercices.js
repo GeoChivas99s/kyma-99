@@ -4,7 +4,7 @@ import { COLORS, ROUTES } from '../../constants';
 import Svg, { Path } from 'react-native-svg';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from "@react-navigation/native";
-import ExerciceDialog from '../dialogs/ExerciceDialog';
+
 const Wallet = () => {
   return (
     <View
@@ -34,7 +34,7 @@ const Wallet = () => {
 
         </View>
       </View>
-      <ExerciceDialog />
+      {/* <ExerciceDialog /> */}
     </View>
   );
 };

@@ -1,12 +1,18 @@
 import { StyleSheet, Text, View, Dimensions, ScrollView, Image, TouchableOpacity } from 'react-native';
-import React from 'react';
-import { COLORS, IMGS, ROUTES, DATA } from '../../constants';
+import React, { useState } from 'react';
+import { COLORS, DATA } from '../../constants';
 import Svg, { Path } from 'react-native-svg';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from "@react-navigation/native";
-
+import ExerciceDialog from '../dialogs/ExerciceDialog';
+import useData from '../../hooks/useData';
 
 const ExerciceSelf = () => {
+
+  const { 
+    setOpenModal,
+    setData,
+    data
+   } = useData();
+
   return (
     <View
       style={{
@@ -29,19 +35,16 @@ const ExerciceSelf = () => {
       <View style={{ flex: 1, marginTop: -40, paddingLeft: 20, paddingRight: 20 }}>
         <Text style={{ textTransform: "uppercase", fontSize: 18, color: COLORS.white }}>Terapia individual</Text>
         <View style={{ height: "85%" }}>
-
-          <ScrollView  style={{ marginTop: 100, padding: 5, }} justifyContent="space-between" >
+          <ScrollView style={{ marginTop: 100, padding: 5, }} justifyContent="space-between" >
             {
               DATA.map((item) => {
                 return (
-
-                  <MinCard key={item.id} data={item} />
+                  <MinCard key={item.id} data={item} handleClick={ ()=> {setOpenModal(prev=>!prev); setData(item)} }/>
                 )
-
               })
             }
           </ScrollView>
-
+          <ExerciceDialog title="Terapia Individual" data={data} />
         </View>
       </View>
     </View>
@@ -53,20 +56,26 @@ export default ExerciceSelf;
 const styles = StyleSheet.create({});
 
 
-const MinCard = ({ data }) => {
+const MinCard = ({ data,handleClick }) => {
   const { id, img, title } = data
   return (
-    <TouchableOpacity style={{
-      borderWidth: 1,
-      height: 100, borderRadius: 5,
-      flexDirection: "row",
-      alignItems: "center", padding: 5,
-      backgroundColor: COLORS.primary,
-      borderColor: COLORS.primary,
-      marginBottom:10
-    }}>
+    <TouchableOpacity
+    onPress={handleClick}
+      style={{
+        borderWidth: 1,
+        height: 100, borderRadius: 5,
+        flexDirection: "row",
+        alignItems: "center", padding: 5,
+        backgroundColor: COLORS.primary,
+        borderColor: COLORS.primary,
+        marginBottom: 10
+      }}>
       <View style={{ width: "30%" }}>
-        <Image source={img} style={{ width: "100%", borderRadius: 5, height: "100%" }} />
+        <Image source={img} 
+        style={{ width: "100%", 
+        borderRadius: 5, 
+        height: "100%" }} />
+
         <View style={{
           width: "100%",
           height: "100%",

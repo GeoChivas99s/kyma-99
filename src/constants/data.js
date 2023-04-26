@@ -6,17 +6,14 @@ const data = [
         img: imgs.step1,
         title: "Respire fundo e com controle quando for se preparar para falar",
         description: `Os sintomas da gagueira podem piorar quando se está ansioso. Portanto, faça exercícios de respiração profunda para relaxar o corpo antes de interagir com outras pessoas para conseguir falar melhor`,
-        steps: `Faça exercícios de respiração regularmente para reduzir a ansiedade.
-        Esses exercícios são ainda mais eficazes antes de interações sociais, que causam sintomas de ansiedade e gagueira.`,
+        steps: `Faça exercícios de respiração regularmente para reduzir a ansiedade.Esses exercícios são ainda mais eficazes antes de interações sociais, que causam sintomas de ansiedade e gagueira.`,
         id: 1
     },
     {
         img: imgs.step2,
         title: "Fale olhando para o espelho",
-        description: `Às vezes, você pode aprender a analisar os seus padrões de fala olhando o seu reflexo no espelho. Preste atenção às palavras, aos sons e às frases que causam gagueira.[3]`,
-        steps: `Faça contato visual consigo mesmo o tempo todo. Isso é importante porque simula uma conversa com outra pessoa, na qual esse contato é indispensável.
-        Você pode ainda visualizar outra pessoa no espelho e imaginar que está conversando com ela para se preparar.
-        Comece o exercício sozinho e, aos poucos, inclua parentes e amigos. As pessoas podem estranhar um pouco, mas explique que é porque você gagueja menos quando está (ou acha que está) sozinho. A presença de outros ajuda nessa parte da análise.`,
+        description: `Às vezes, você pode aprender a analisar os seus padrões de fala olhando o seu reflexo no espelho. Preste atenção às palavras, aos sons e às frases que causam gagueira.`,
+        steps: `Faça contato visual consigo mesmo o tempo todo. Isso é importante porque simula uma conversa com outra pessoa, na qual esse contato é indispensável.   Você pode ainda visualizar outra pessoa no espelho e imaginar que está conversando com ela para se preparar.Comece o exercício sozinho e, aos poucos, inclua parentes e amigos. As pessoas podem estranhar um pouco, mas explique que é porque você gagueja menos quando está (ou acha que está) sozinho. A presença de outros ajuda nessa parte da análise.`,
         id: 2
     },
     {
@@ -37,8 +34,7 @@ const data = [
         img: imgs.step5,
         title: "Ensaie com as palavras que causam a gagueira",
         description: `Depois de identificar os termos que causam a gagueira, concentre-se neles durante os ensaios. Repita as frases, os sons e as palavras para se dessensibilizar.`,
-        steps: `Concentre-se primeiro em repetir esses termos bem devagar, sempre respirando fundo com calma. Como ainda é o início, não se preocupe se você gaguejar.
-        Quando você conseguir dizer melhor esses termos individualmente, comece a formar frases completas, ainda falando devagar e com calma.
+        steps: `Concentre-se primeiro em repetir esses termos bem devagar, sempre respirando fundo com calma. Como ainda é o início, não se preocupe se você gaguejar.Quando você conseguir dizer melhor esses termos individualmente, comece a formar frases completas, ainda falando devagar e com calma.
         `,
         id: 5
     },
@@ -46,8 +42,7 @@ const data = [
         img: imgs.step6,
         title: "Prolongue a primeira sílaba de cada palavra",
         description: `Essa prática, conhecida como prolongamento, aumenta o foco e reduz a tensão que leva a pessoa à gagueira. Fale com o máximo de calma que você conseguir, atentando-se a cada sílaba individual.`,
-        steps: `Concentre-se ainda mais nos termos que causam a gagueira. Divida esses sons e palavras em sessões para conseguir cumprir o exercício.
-        Não se preocupe se você gaguejar durante os exercícios. O objetivo não é falar sem gaguejar, mas sim manter a calma durante a fala.`,
+        steps: `Concentre-se ainda mais nos termos que causam a gagueira. Divida esses sons e palavras em sessões para conseguir cumprir o exercício.Não se preocupe se você gaguejar durante os exercícios. O objetivo não é falar sem gaguejar, mas sim manter a calma durante a fala.`,
         id: 6
     },
     {
@@ -61,9 +56,7 @@ const data = [
         img: imgs.step8,
         title: "Leia em voz alta",
         description: ` Esse exercício também ajuda a acostumar a pessoa à pronúncia das palavras. Preste atenção a cada sílaba individual, começando com uma passagem que você já conhece. Depois, passe a ler trechos que nunca leu antes para treinar o cérebro a situações mais complexas`,
-        steps: `Mais uma vez, não se preocupe se você gaguejar enquanto lê. Continue o exercício.
-        Misture atividades de leitura e ritmo. Por exemplo: leia um texto enquanto bate as mãos na mesa em intervalos regulares.
-        Use a técnica do prolongamento para ler, concentrando-se em falar bem devagar e com calma.`,
+        steps: `Mais uma vez, não se preocupe se você gaguejar enquanto lê. Continue o exercício. Misture atividades de leitura e ritmo. Por exemplo: leia um texto enquanto bate as mãos na mesa em intervalos regulares. Use a técnica do prolongamento para ler, concentrando-se em falar bem devagar e com calma.`,
         id: 8
     },
     {
