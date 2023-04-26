@@ -12,13 +12,17 @@ import { COLORS, ROUTES } from "../../constants";
 import Icon from "react-native-vector-icons/Ionicons";
 import React, { useCallback, useEffect, useState } from "react";
 import { InterruptionModeIOS, InterruptionModeAndroid } from "expo-av";
+import { analyzeTranscription } from "../../utils";
+import Toast from "react-native-toast-message";
+import DiagnosticDialog from "../dialogs/diagnosticDialog";
 
+import useData from "../../hooks/useData";
 const Diagnostic = () => {
   const [message, setMessage] = useState("");
   const [recording, setRecording] = useState<any>();
   const [recordings, setRecordings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  
+  const { openModal, setOpenModal } = useData();
   const RECORDING_OPTIONS = {
     android: {
       extension: ".m4a",
@@ -99,10 +103,17 @@ const Diagnostic = () => {
       .then((data) => {
         setMessage(data.results[0].alternatives[0].transcript);
         console.log(data.results[0].alternatives[0].transcript);
+        console.log(
+          analyzeTranscription(data.results[0].alternatives[0].transcript)
+        );
       })
       .catch((error) => {
         console.log(error);
         setMessage("");
+        Toast.show({
+          type: "error",
+          text1: "Erro ao realizar a transcrição do aúdio!",
+        });
       })
       .finally(() => {
         console.log("Foii!!");
@@ -114,6 +125,9 @@ const Diagnostic = () => {
 
   useEffect(() => {
     if (message) {
+      setOpenModal(true);
+      setRecording(null)
+      setRecordings([])
     }
   }, [message]);
 
@@ -259,6 +273,7 @@ const Diagnostic = () => {
           {getRecordLines()}
         </View>
       </View>
+      <DiagnosticDialog />
     </View>
   );
 };
