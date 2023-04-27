@@ -144,6 +144,8 @@ const Diagnostic = () => {
         });
       }
     });
+  //  setOpenModal(true);
+
   }, []);
 
   function getRecordLines() {
