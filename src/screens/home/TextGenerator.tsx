@@ -20,8 +20,7 @@ const TextGenerator = () => {
   const [data, setData] = useState("");
 
   const API_KEY = "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";
-  const API_URL =
-    "https://api.openai.com/v1/engines/text-davinci-003-playground/completions";
+
 
   function handleFetchTags() {
     setIsLoading(true);
@@ -49,7 +48,7 @@ const TextGenerator = () => {
         console.log(data.choices[0].text);
         setData(data.choices[0].text);
       })
-      .catch(() => Alert.alert("Erro", "Não foi possível buscar as tags."))
+      .catch(() => Alert.alert("Erro", "Não foi possível Gerar o texto"))
       .finally(() => setIsLoading(false));
   }
 
