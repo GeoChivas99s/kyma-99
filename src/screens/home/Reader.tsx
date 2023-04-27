@@ -5,6 +5,7 @@ import {
   Alert,
   TouchableOpacity,
   TextInput,
+  ScrollView
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { COLORS, ROUTES } from "../../constants";
@@ -72,7 +73,7 @@ const Reader = () => {
 
             marginTop: 70,
             //   borderWidth: 3,
-            padding: 10,
+            padding: 5,
             height: "80%",
             // justifyContent: "center",
             // alignItems: "center",
@@ -107,23 +108,35 @@ const Reader = () => {
                 borderRadius: 10,
                 backgroundColor: COLORS.primary,
               }}
-              onPress={() => addChip(word, generateId())}
+              onPress={() =>{ addChip(word, generateId());
+              setWord("")
+              }}
             >
               <Icon name="add-circle" size={40} color={COLORS.white} />
             </TouchableOpacity>
           </View>
-
-          {words &&
-            Object.keys(words).map((item) => {
-              return (
-                <Chip
-                  text={words[item]}
-                  handleCLick={() => removeChips(item)}
-                />
-              );
-            })}
+          <ScrollView
+          horizontal
+            style={{
+            //  height: "100%",
+              flexDirection: "column",
+              flexWrap: "wrap",
+              marginTop: 10,
+            }}
+          >
+            {words &&
+              Object.keys(words).reverse().map((item) => {
+                return (
+                  <Chip
+                    text={words[item]}
+                    handleCLick={() => removeChips(item)}
+                  />
+                );
+              })}
+          </ScrollView>
         </View>
       </View>
+      
     </View>
   );
 };
@@ -146,6 +159,7 @@ const Chip = ({
         padding: 10,
         justifyContent: "space-between",
         borderRadius: 10,
+        margin: 5,
       }}
     >
       <Text style={{ fontSize: 18, color: "white", marginRight: 15 }}>
