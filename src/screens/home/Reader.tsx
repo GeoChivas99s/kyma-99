@@ -11,18 +11,14 @@ import { COLORS, ROUTES } from "../../constants";
 import Svg, { Path } from "react-native-svg";
 import Icon from "react-native-vector-icons/Ionicons";
 import * as Speech from "expo-speech";
-import uuid from 'react-native-uuid'
-
-
-
 
 const Reader = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState("");
-  const [words, setWords] = useState<Record<string, number>>({});
-  const API_KEY = "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";
+  const [isLoading, setIsLoading] = useState(false);
+  const [words, setWords] = useState<Record<string, string>>({});
+
   const [word, setWord] = useState<string>("");
-  const addChip = (name: string, id: number) => {
+  const addChip = (name: string, id: string) => {
     if (name) {
       setWords((prev) => ({ ...prev, [id]: name }));
     }
@@ -34,8 +30,9 @@ const Reader = () => {
     setWords(newFilters);
   };
 
-  console.log(uuid.v4());
-
+  const generateId = () =>
+    Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+  console.log(words);
   return (
     <View
       style={{
@@ -110,12 +107,21 @@ const Reader = () => {
                 borderRadius: 10,
                 backgroundColor: COLORS.primary,
               }}
-              onPress={() => addChip(word, uuid.v4())}
+              onPress={() => addChip(word, generateId())}
             >
               <Icon name="add-circle" size={40} color={COLORS.white} />
             </TouchableOpacity>
           </View>
-          {/* <Chip text="Geovane Lindo" handleCLick={() => {}} /> */}
+
+          {words &&
+            Object.keys(words).map((item) => {
+              return (
+                <Chip
+                  text={words[item]}
+                  handleCLick={() => removeChips(item)}
+                />
+              );
+            })}
         </View>
       </View>
     </View>
