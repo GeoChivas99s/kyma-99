@@ -5,7 +5,7 @@ import {
   Alert,
   TouchableOpacity,
   TextInput,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { COLORS, ROUTES } from "../../constants";
@@ -108,35 +108,50 @@ const Reader = () => {
                 borderRadius: 10,
                 backgroundColor: COLORS.primary,
               }}
-              onPress={() =>{ addChip(word, generateId());
-              setWord("")
+              onPress={() => {
+                addChip(word, generateId());
+                setWord("");
               }}
             >
               <Icon name="add-circle" size={40} color={COLORS.white} />
             </TouchableOpacity>
           </View>
           <ScrollView
-          horizontal
+            horizontal
             style={{
-            //  height: "100%",
+              maxHeight:70,
+              // height: "190%",
               flexDirection: "column",
               flexWrap: "wrap",
-              marginTop: 10,
+              marginTop: 10
             }}
           >
             {words &&
-              Object.keys(words).reverse().map((item) => {
-                return (
-                  <Chip
-                    text={words[item]}
-                    handleCLick={() => removeChips(item)}
-                  />
-                );
-              })}
+              Object.keys(words)
+                .reverse()
+                .map((item) => {
+                  return (
+                    <Chip
+                      key={item}
+                      text={words[item]}
+                      handleCLick={() => removeChips(item)}
+                    />
+                  );
+                })}
+          </ScrollView>
+          <ScrollView
+            style={{
+              flexDirection: "column",
+              flexWrap: "wrap",
+              marginTop: 10,
+              borderWidth:1,
+              borderRadius:10
+            }}
+          >
+           
           </ScrollView>
         </View>
       </View>
-      
     </View>
   );
 };
