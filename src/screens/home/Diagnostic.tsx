@@ -117,7 +117,7 @@ const Diagnostic = () => {
         });
       })
       .finally(() => {
-        console.log("Foii!!");
+        // console.log("Foii!!");
         setIsLoading(false);
       });
   };
@@ -145,7 +145,7 @@ const Diagnostic = () => {
         });
       }
     });
-   setOpenModal(true);
+  //  setOpenModal(true);
 
   }, []);
 
