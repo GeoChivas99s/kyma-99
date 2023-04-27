@@ -17,7 +17,7 @@ const menuOptions = [
     name: "Gerador de texto",
     icon: "document",
     color: COLORS.primary,
-    route: ROUTES.HOME,
+    route: ROUTES.TEXT_GENERATOR,
     id: 2
   },
   {

@@ -9,6 +9,8 @@ export default {
 
   HOME_PAGE: 'Home page',
   DIAGNOSTIC: 'Diagnostic',
+   
+TEXT_GENERATOR: "Text Generator",
 
   TERAPY: 'Terapy',
   TERAPY_DRAWER: 'Terapy Drawer',
