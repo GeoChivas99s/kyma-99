@@ -11,7 +11,7 @@ export default {
   DIAGNOSTIC: 'Diagnostic',
    
 TEXT_GENERATOR: "Text Generator",
-
+READER :  "Reader",
   TERAPY: 'Terapy',
   TERAPY_DRAWER: 'Terapy Drawer',
   TERAPY_TAB: ' Terapy tab',

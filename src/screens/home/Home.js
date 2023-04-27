@@ -31,7 +31,7 @@ const menuOptions = [
     name: "Leitura assistida",
     icon: "book",
     color: COLORS.primary,
-    route: ROUTES.HOME,
+    route: ROUTES.READER,
     id: 4
   },
   {

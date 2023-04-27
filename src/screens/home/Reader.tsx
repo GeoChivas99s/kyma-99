@@ -1,12 +1,8 @@
 import {
-  StyleSheet,
   Text,
   View,
   Dimensions,
-  TouchableOpacity,
-  ScrollView,
   Alert,
-  ActivityIndicator,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { COLORS, ROUTES } from "../../constants";
@@ -20,59 +16,6 @@ const Reader = () => {
 
   const API_KEY = "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";
 
-  function handleFetchText() {
-    setIsLoading(true);
-    const prompt = `Gere um texto com 8 parágrafros em português para eu poder exercitar a minha leitura , e garanta que o texto gerado não seja igual ao anterior `;
-    fetch(
-      "https://api.openai.com/v1/engines/text-davinci-003-playground/completions",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${API_KEY}`,
-        },
-        body: JSON.stringify({
-          prompt,
-          temperature: 0.22,
-          max_tokens: 500,
-          top_p: 1,
-          frequency_penalty: 0,
-          presence_penalty: 0,
-        }),
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data.choices[0].text);
-        setData(data.choices[0].text);
-      })
-      .catch(() => Alert.alert("Erro", "Não foi possível Gerar o texto"))
-      .finally(() => setIsLoading(false));
-  }
-  const speak = () => {
-    stopSpeak();
-    Speech.speak(data, {
-      language: "pt-PT",
-      pitch: 1,
-      rate: 1,
-    });
-  };
-  const stopSpeak = () => {
-    Speech.stop();
-  };
-  const pauseAndResumeSpeak = async () => {
-    const isSpeaking = await Speech.isSpeakingAsync();
-    isSpeaking ? Speech.pause() : Speech.resume();
-  };
-  useEffect(() => {
-    (async function () {
-      handleFetchText();
-    })();
-    //  stopSpeak()
-    return () => {
-      stopSpeak();
-    };
-  }, []);
 
   return (
     <View
@@ -105,70 +48,9 @@ const Reader = () => {
             color: COLORS.white,
           }}
         >
-          Gerador de Texto
+         Leitura
         </Text>
-        <View
-          style={{
-            marginTop: 60,
-            // borderWidth: 2,
-            // padding: 10,
-            height: "80%",
-            justifyContent: "space-between",
-          }}
-        >
-          <View
-            style={{
-              flex: 1 / 9,
-              //   borderWidth: 1,
-              flexDirection: "row",
-              alignItems: "center",
-              padding: 5,
-              justifyContent: "space-between",
-            }}
-          >
-            <TouchableOpacity
-              style={{
-                // borderWidth: 1,
-                width: 250,
-                padding: 10,
-                borderRadius: 10,
-                backgroundColor: COLORS.primary,
-              }}
-              onPress={handleFetchText}
-              disabled={isLoading}
-            >
-              <Text style={{ color: "white", fontSize: 18 }}>
-                Aperte para gerar um texto
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                // borderWidth: 1,
-                width: 50,
-                padding: 10,
-                borderRadius: 10,
-                backgroundColor: COLORS.primary,
-                alignItems: "center",
-              }}
-              onPress={speak}
-              disabled={isLoading}
-            >
-              <Text>
-                <Icon name="play" color="white" size={20} />
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <ScrollView
-            style={{ flex: 3, borderWidth: 1, borderRadius: 10, padding: 10  }}
-            
-          >
-            {isLoading ? (
-              <ActivityIndicator color={COLORS.primary} size="large" />
-            ) : (
-              <Text>{data}</Text>
-            )}
-          </ScrollView>
-        </View>
+       
       </View>
     </View>
   );
