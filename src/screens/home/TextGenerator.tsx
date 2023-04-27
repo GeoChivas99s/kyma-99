@@ -44,7 +44,7 @@ const TextGenerator = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.choices[0].text);
+        // console.log(data.choices[0].text);
         setData(data.choices[0].text);
       })
       .catch(() => Alert.alert("Erro", "Não foi possível Gerar o texto"))
