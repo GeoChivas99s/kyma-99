@@ -22,7 +22,7 @@ const Diagnostic = () => {
   const [recording, setRecording] = useState<any>();
   const [recordings, setRecordings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { openModal, setOpenModal } = useData();
+  const { openModal, setOpenModal,  setData } = useData();
   const RECORDING_OPTIONS = {
     android: {
       extension: ".m4a",
@@ -106,6 +106,7 @@ const Diagnostic = () => {
         console.log(
           analyzeTranscription(data.results[0].alternatives[0].transcript)
         );
+        setData( analyzeTranscription(data.results[0].alternatives[0].transcript))
       })
       .catch((error) => {
         console.log(error);

@@ -11,8 +11,45 @@ import {
   ScrollView,
 } from "react-native";
 import KymaModal from "../../components/KymaModal";
-
+import useData from "../../hooks/useData";
 const DiagnosticDialog = () => {
+  const { data } = useData();
+  // disfluencyPercentage,
+  // severity,
+  // hesitationMatches,
+  // prolongationMatches,
+  // repetitionMatches,
+
+  const dataCard = [
+    {
+      id: 1,
+      icon: "person-remove",
+      text: "Disfluência",
+      qtd: data?.disfluencyPercentage,
+      simbol: "%",
+    },
+    {
+      id: 2,
+      icon: "ellipsis-horizontal",
+      text: "Hesitações",
+      qtd: data?.hesitationMatches,
+      simbol: "x",
+    },
+    {
+      id: 3,
+      icon: "reorder-four",
+      text: "Prolongações",
+      qtd: data?.prolongationMatches,
+      simbol: "x",
+    },
+    {
+      id: 4,
+      icon: "sync-outline",
+      text: "Repetições",
+      qtd: data?.repetitionMatches,
+      simbol: "x",
+    },
+  ];
   return (
     <KymaModal title="Diagnóstico">
       <Text></Text>
@@ -31,16 +68,16 @@ const DiagnosticDialog = () => {
             padding: 20,
             backgroundColor: "#1F6C65",
             marginLeft: 10,
-            borderRadius:10,
-            overflow:"hidden",
-            width:"95%",
-            flexDirection:"row",
-            alignItems:"center",
-            justifyContent:"space-between"
+            borderRadius: 10,
+            overflow: "hidden",
+            width: "95%",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
-           <Text style={{fontSize: 25, color: "white",}}>Severidade:</Text> 
-           <Text style={{fontSize: 25, color: "white",}}>Moderada</Text>
+          <Text style={{ fontSize: 25, color: "white" }}>Severidade:</Text>
+          <Text style={{ fontSize: 25, color: "white" }}>{data.severity}</Text>
         </View>
 
         <View
@@ -53,10 +90,17 @@ const DiagnosticDialog = () => {
             justifyContent: "space-between",
           }}
         >
-          <DialogCard />
-          <DialogCard />
-          <DialogCard />
-          <DialogCard />
+          {dataCard.map((item) => {
+            return (
+              <DialogCard
+                simbol={item.simbol}
+                text={item.text}
+                icon={item.icon}
+                qtd={item.qtd}
+                key={item.id}
+              />
+            );
+          })}
         </View>
       </View>
     </KymaModal>
@@ -65,7 +109,7 @@ const DiagnosticDialog = () => {
 
 export default DiagnosticDialog;
 
-const DialogCard = () => {
+const DialogCard = ({ simbol, icon, text, qtd }: any) => {
   return (
     <View
       style={{
@@ -99,16 +143,19 @@ const DialogCard = () => {
             borderRadius: 10,
           }}
         >
-          <Icon name="mic" size={30} color="#1F6C65" />
+          <Icon name={icon} size={30} color="#1F6C65" />
         </View>
 
-        <Text style={{ color: "white", fontSize: 28 }}>16x</Text>
+        <Text style={{ color: "white", fontSize: 28 }}>
+          {qtd}
+          {simbol}
+        </Text>
       </View>
 
       <Text
         style={{ color: "white", textTransform: "uppercase", fontSize: 16 }}
       >
-        Prolongações
+        {text}
       </Text>
     </View>
   );
