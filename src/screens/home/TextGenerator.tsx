@@ -5,24 +5,24 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
-  TextInput,
   Alert,
   ActivityIndicator,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { COLORS, ROUTES } from "../../constants";
 import Svg, { Path } from "react-native-svg";
 import Icon from "react-native-vector-icons/Ionicons";
-import { useNavigation } from "@react-navigation/native";
+
+import * as Speech from "expo-speech";
 
 const TextGenerator = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState("");
 
-  const API_KEY = "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";
+  const API_KEY = "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";
 
-
-  function handleFetchTags() {
+ 
+  function handleFetchText() {
     setIsLoading(true);
     const prompt = `Gere textos bons para eu poder treinar a minha leitura`;
     fetch(
@@ -51,6 +51,31 @@ const TextGenerator = () => {
       .catch(() => Alert.alert("Erro", "Não foi possível Gerar o texto"))
       .finally(() => setIsLoading(false));
   }
+  const speak = () => {
+    console.log("11111")
+    stopSpeak();
+    Speech.speak(data, {
+      language: "pt-PT",
+      pitch: 1,
+      rate: 1,
+    });
+  };
+  const stopSpeak = () => {
+    Speech.stop();
+  };
+
+  useEffect(() => {
+    (async function () {
+        handleFetchText();
+    })();
+  //  stopSpeak()
+   return ()=> {
+    stopSpeak();
+   } 
+  }, []);
+
+
+
 
   return (
     <View
@@ -112,11 +137,11 @@ const TextGenerator = () => {
                 borderRadius: 10,
                 backgroundColor: COLORS.primary,
               }}
-              onPress={handleFetchTags}
+              onPress={handleFetchText}
             >
               <Text style={{ color: "white", fontSize: 18 }}>
                 {isLoading ? (
-                  <ActivityIndicator />
+                  <ActivityIndicator color="white" />
                 ) : (
                   "Aperte para gerar um texto"
                 )}
@@ -131,8 +156,11 @@ const TextGenerator = () => {
                 backgroundColor: COLORS.primary,
                 alignItems: "center",
               }}
+              onPress={speak}
             >
-              <Icon name="play" color="white" size={20} />
+            <Text> 
+                  <Icon name="play" color="white" size={20} />
+                </Text>
             </TouchableOpacity>
           </View>
           <ScrollView
