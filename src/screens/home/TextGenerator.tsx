@@ -8,7 +8,7 @@ import {
   Alert,
   ActivityIndicator,
 } from "react-native";
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { COLORS, ROUTES } from "../../constants";
 import Svg, { Path } from "react-native-svg";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -19,12 +19,11 @@ const TextGenerator = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState("");
 
-  const API_KEY = "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";
+  const API_KEY = "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";
 
- 
   function handleFetchText() {
     setIsLoading(true);
-    const prompt = `Gere textos bons para eu poder treinar a minha leitura`;
+    const prompt = `Gere um texto com 8 parágrafros em português para eu poder exercitar a minha leitura , e garanta que o texto gerado não seja igual ao anterior `;
     fetch(
       "https://api.openai.com/v1/engines/text-davinci-003-playground/completions",
       {
@@ -52,7 +51,6 @@ const TextGenerator = () => {
       .finally(() => setIsLoading(false));
   }
   const speak = () => {
-    console.log("11111")
     stopSpeak();
     Speech.speak(data, {
       language: "pt-PT",
@@ -63,19 +61,19 @@ const TextGenerator = () => {
   const stopSpeak = () => {
     Speech.stop();
   };
-
+  const pauseAndResumeSpeak = async () => {
+    const isSpeaking = await Speech.isSpeakingAsync();
+    isSpeaking ? Speech.pause() : Speech.resume();
+  };
   useEffect(() => {
     (async function () {
-        handleFetchText();
+      handleFetchText();
     })();
-  //  stopSpeak()
-   return ()=> {
-    stopSpeak();
-   } 
+    //  stopSpeak()
+    return () => {
+      stopSpeak();
+    };
   }, []);
-
-
-
 
   return (
     <View
@@ -138,13 +136,10 @@ const TextGenerator = () => {
                 backgroundColor: COLORS.primary,
               }}
               onPress={handleFetchText}
+              disabled={isLoading}
             >
               <Text style={{ color: "white", fontSize: 18 }}>
-                {isLoading ? (
-                  <ActivityIndicator color="white" />
-                ) : (
-                  "Aperte para gerar um texto"
-                )}
+                Aperte para gerar um texto
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -157,16 +152,22 @@ const TextGenerator = () => {
                 alignItems: "center",
               }}
               onPress={speak}
+              disabled={isLoading}
             >
-            <Text> 
-                  <Icon name="play" color="white" size={20} />
-                </Text>
+              <Text>
+                <Icon name="play" color="white" size={20} />
+              </Text>
             </TouchableOpacity>
           </View>
           <ScrollView
-            style={{ flex: 3, borderWidth: 1, borderRadius: 10, padding: 10 }}
+            style={{ flex: 3, borderWidth: 1, borderRadius: 10, padding: 10  }}
+            
           >
-            <Text>{data}</Text>
+            {isLoading ? (
+              <ActivityIndicator color={COLORS.primary} size="large" />
+            ) : (
+              <Text>{data}</Text>
+            )}
           </ScrollView>
         </View>
       </View>
