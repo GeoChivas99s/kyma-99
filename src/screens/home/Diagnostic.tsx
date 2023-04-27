@@ -144,7 +144,7 @@ const Diagnostic = () => {
         });
       }
     });
-  //  setOpenModal(true);
+   setOpenModal(true);
 
   }, []);
 
