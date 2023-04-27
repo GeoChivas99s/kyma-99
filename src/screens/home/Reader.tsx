@@ -1,9 +1,4 @@
-import {
-  Text,
-  View,
-  Dimensions,
-  Alert,
-} from "react-native";
+import { Text, View, Dimensions, Alert, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
 import { COLORS, ROUTES } from "../../constants";
 import Svg, { Path } from "react-native-svg";
@@ -15,7 +10,6 @@ const Reader = () => {
   const [data, setData] = useState("");
 
   const API_KEY = "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";
-
 
   return (
     <View
@@ -48,12 +42,52 @@ const Reader = () => {
             color: COLORS.white,
           }}
         >
-         Leitura
+          Leitura
         </Text>
-       
+        <View
+          style={{
+            borderWidth: 1,
+
+            marginTop: 50,
+            //   borderWidth: 3,
+            padding: 10,
+            height: "80%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Chip text="Geovane Lindo" handleCLick={() => {}} />
+      
+        </View>
       </View>
     </View>
   );
 };
 
 export default Reader;
+
+const Chip = ({
+  text,
+  handleCLick,
+}: {
+  text: string;
+  handleCLick: () => void;
+}) => {
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        backgroundColor: COLORS.primary,
+        padding: 10,
+        justifyContent:"space-between",
+        borderRadius:10
+      }}
+    >
+      <Text style={{ fontSize: 18 ,color:"white" , marginRight:15}}>{text}</Text>
+      <TouchableOpacity onPress={handleCLick}  >
+        <Icon name="close" size={35} color="white" />
+      </TouchableOpacity>
+    </View>
+  );
+};
