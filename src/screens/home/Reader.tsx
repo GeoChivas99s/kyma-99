@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { COLORS, ROUTES } from "../../constants";
@@ -17,10 +18,12 @@ const Reader = () => {
   const [data, setData] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [words, setWords] = useState<Record<string, string>>({});
+  const API_KEY = "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";
 
   const [word, setWord] = useState<string>("");
   const addChip = (name: string, id: string) => {
     if (name) {
+      setData("")
       setWords((prev) => ({ ...prev, [id]: name }));
     }
   };
@@ -33,7 +36,42 @@ const Reader = () => {
 
   const generateId = () =>
     Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
-  console.log(words);
+
+  function handleFetchText() {
+    setIsLoading(true);
+    setWords({})
+    const prompt = `Gere um texto com 8 parágrafros em português para eu poder exercitar a minha leitura e que contenha essas palavras aqui ${Object.values(
+      words
+    )} `;
+    fetch(
+      "https://api.openai.com/v1/engines/text-davinci-003-playground/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_KEY}`,
+        },
+        body: JSON.stringify({
+          prompt,
+          temperature: 0.22,
+          max_tokens: 500,
+          top_p: 1,
+          frequency_penalty: 0,
+          presence_penalty: 0,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data.choices[0].text);
+        setData(data.choices[0].text);
+      })
+      .catch(() => Alert.alert("Erro", "Não foi possível Gerar o texto"))
+      .finally(() => {setIsLoading(false)
+     
+      });
+  }
+
   return (
     <View
       style={{
@@ -107,6 +145,10 @@ const Reader = () => {
                 padding: 5,
                 borderRadius: 10,
                 backgroundColor: COLORS.primary,
+                position: "absolute",
+                right: 81,
+                borderWidth: 1,
+                borderColor: COLORS.primary,
               }}
               onPress={() => {
                 addChip(word, generateId());
@@ -115,15 +157,32 @@ const Reader = () => {
             >
               <Icon name="add-circle" size={40} color={COLORS.white} />
             </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                padding: 5,
+                borderRadius: 10,
+                backgroundColor: COLORS.primary,
+                width: 70,
+                alignItems: "center",
+              }}
+              disabled={isLoading || !words}
+              onPress={handleFetchText}
+            >
+              {isLoading ? (
+                <ActivityIndicator color="white" size="large"/>
+              ) : (
+                <Icon name="arrow-up" size={40} color={COLORS.white} />
+              )}
+            </TouchableOpacity>
           </View>
-          <ScrollView
+         { !data && <ScrollView
             horizontal
             style={{
-              maxHeight:70,
+              maxHeight: 90,
               // height: "190%",
               flexDirection: "column",
               flexWrap: "wrap",
-              marginTop: 10
+              marginTop: 10,
             }}
           >
             {words &&
@@ -138,18 +197,20 @@ const Reader = () => {
                     />
                   );
                 })}
-          </ScrollView>
-          <ScrollView
-            style={{
-              flexDirection: "column",
-              flexWrap: "wrap",
-              marginTop: 10,
-              borderWidth:1,
-              borderRadius:10
-            }}
-          >
-           
-          </ScrollView>
+          </ScrollView>}
+          {data && (
+            <ScrollView
+              style={{
+                flexDirection: "column",
+                flexWrap: "wrap",
+                marginTop: 10,
+                borderWidth: 1,
+                borderRadius: 10,
+              }}
+            >
+              <Text>{data}</Text>
+            </ScrollView>
+          )}
         </View>
       </View>
     </View>
