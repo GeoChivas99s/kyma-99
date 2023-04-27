@@ -1,15 +1,40 @@
-import { Text, View, Dimensions, Alert, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  Dimensions,
+  Alert,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { COLORS, ROUTES } from "../../constants";
 import Svg, { Path } from "react-native-svg";
 import Icon from "react-native-vector-icons/Ionicons";
 import * as Speech from "expo-speech";
+import uuid from 'react-native-uuid'
+
+
+
 
 const Reader = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState("");
-
+  const [words, setWords] = useState<Record<string, number>>({});
   const API_KEY = "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";
+  const [word, setWord] = useState<string>("");
+  const addChip = (name: string, id: number) => {
+    if (name) {
+      setWords((prev) => ({ ...prev, [id]: name }));
+    }
+  };
+
+  const removeChips = (id: string) => {
+    const newFilters = { ...words };
+    delete newFilters[id];
+    setWords(newFilters);
+  };
+
+  console.log(uuid.v4());
 
   return (
     <View
@@ -46,18 +71,51 @@ const Reader = () => {
         </Text>
         <View
           style={{
-            borderWidth: 1,
+            // borderWidth: 1,
 
-            marginTop: 50,
+            marginTop: 70,
             //   borderWidth: 3,
             padding: 10,
             height: "80%",
-            justifyContent: "center",
-            alignItems: "center",
+            // justifyContent: "center",
+            // alignItems: "center",
           }}
         >
-          <Chip text="Geovane Lindo" handleCLick={() => {}} />
-      
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <TextInput
+              value={word}
+              onChangeText={(text: string) => {
+                // console.log(e);
+                setWord(text);
+              }}
+              placeholder="Adicione uma palavra ..."
+              style={{
+                borderWidth: 1,
+                width: 280,
+                padding: 18,
+                borderRadius: 10,
+                borderColor: COLORS.gray,
+              }}
+              placeholderTextColor={COLORS.gray}
+            />
+            <TouchableOpacity
+              style={{
+                padding: 5,
+                borderRadius: 10,
+                backgroundColor: COLORS.primary,
+              }}
+              onPress={() => addChip(word, uuid.v4())}
+            >
+              <Icon name="add-circle" size={40} color={COLORS.white} />
+            </TouchableOpacity>
+          </View>
+          {/* <Chip text="Geovane Lindo" handleCLick={() => {}} /> */}
         </View>
       </View>
     </View>
@@ -80,12 +138,14 @@ const Chip = ({
         alignItems: "center",
         backgroundColor: COLORS.primary,
         padding: 10,
-        justifyContent:"space-between",
-        borderRadius:10
+        justifyContent: "space-between",
+        borderRadius: 10,
       }}
     >
-      <Text style={{ fontSize: 18 ,color:"white" , marginRight:15}}>{text}</Text>
-      <TouchableOpacity onPress={handleCLick}  >
+      <Text style={{ fontSize: 18, color: "white", marginRight: 15 }}>
+        {text}
+      </Text>
+      <TouchableOpacity onPress={handleCLick}>
         <Icon name="close" size={35} color="white" />
       </TouchableOpacity>
     </View>
