@@ -6,14 +6,53 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Alert,
+  ActivityIndicator,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { COLORS, ROUTES } from "../../constants";
 import Svg, { Path } from "react-native-svg";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
 const TextGenerator = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState("");
+
+  const API_KEY = "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";
+  const API_URL =
+    "https://api.openai.com/v1/engines/text-davinci-003-playground/completions";
+
+  function handleFetchTags() {
+    setIsLoading(true);
+    const prompt = `Gere textos bons para eu poder treinar a minha leitura`;
+    fetch(
+      "https://api.openai.com/v1/engines/text-davinci-003-playground/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_KEY}`,
+        },
+        body: JSON.stringify({
+          prompt,
+          temperature: 0.22,
+          max_tokens: 500,
+          top_p: 1,
+          frequency_penalty: 0,
+          presence_penalty: 0,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.choices[0].text);
+        setData(data.choices[0].text);
+      })
+      .catch(() => Alert.alert("Erro", "Não foi possível buscar as tags."))
+      .finally(() => setIsLoading(false));
+  }
+
   return (
     <View
       style={{
@@ -59,7 +98,7 @@ const TextGenerator = () => {
           <View
             style={{
               flex: 1 / 9,
-            //   borderWidth: 1,
+              //   borderWidth: 1,
               flexDirection: "row",
               alignItems: "center",
               padding: 5,
@@ -74,24 +113,33 @@ const TextGenerator = () => {
                 borderRadius: 10,
                 backgroundColor: COLORS.primary,
               }}
+              onPress={handleFetchTags}
             >
               <Text style={{ color: "white", fontSize: 18 }}>
-                Aperte para gerar um texto
+                {isLoading ? (
+                  <ActivityIndicator />
+                ) : (
+                  "Aperte para gerar um texto"
+                )}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{
+            <TouchableOpacity
+              style={{
                 // borderWidth: 1,
                 width: 50,
                 padding: 10,
                 borderRadius: 10,
                 backgroundColor: COLORS.primary,
-                alignItems:"center"
-              }}>
+                alignItems: "center",
+              }}
+            >
               <Icon name="play" color="white" size={20} />
             </TouchableOpacity>
           </View>
-          <ScrollView style={{ flex: 3, borderWidth: 1 , borderRadius:10, padding:10}}>
-            <Text>sdsdsd</Text>
+          <ScrollView
+            style={{ flex: 3, borderWidth: 1, borderRadius: 10, padding: 10 }}
+          >
+            <Text>{data}</Text>
           </ScrollView>
         </View>
       </View>
