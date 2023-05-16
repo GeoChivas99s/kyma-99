@@ -82,20 +82,45 @@ const Diagnostic = () => {
   }
   // 1f8caa5424bf47d09b2bcf4ef36b7f3d
   const generateText = async (base64File: string) => {
+    // console.log(base64File)
     setIsLoading(true);
-    const response = await fetch("https://api.rev.ai/speechtotext/v1/jobs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer 028uDR5EgS624uObSVHVtTvIpLQWSVgkAuAbnSFwJziqxQOvPLDhB37v8AoNCL-Flrrr44jy4LBwxXhc-X0svy5PzPDPE",
-      },
-      body: JSON.stringify({ media: { content: base64File }, content_type: 'audio/x-wav' }),
-    });
-    const a = await response.json();
-    console.log(a);
-  };
-
+    fetch(
+      `https://speech.googleapis.com/v1/speech:recognize?key=AIzaSyBTqE8gOnEqle3RP_YnWlIGKMk5reIGzuQ`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          config: {
+            languageCode: "pt-BR",
+            encoding: "LINEAR16",
+            sampleRateHertz: 41000,
+          },
+          audio: {
+            content: base64File,
+          },
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setMessage(data.results[0].alternatives[0].transcript);
+        console.log(data.results[0].alternatives[0].transcript);
+        console.log(
+          analyzeTranscription(data.results[0].alternatives[0].transcript)
+        );
+        setData( analyzeTranscription(data.results[0].alternatives[0].transcript))
+      })
+      .catch((error) => {
+        console.log(error);
+        setMessage("");
+        // Toast.show({
+        //   type: "error",
+        //   text1: "Erro ao realizar a transcrição do aúdio!",
+        // });
+      })
+      .finally(() => {
+        // console.log("Foii!!");
+        setIsLoading(false);
+      }); }
   useCallback(() => {}, [message]);
 
   useEffect(() => {

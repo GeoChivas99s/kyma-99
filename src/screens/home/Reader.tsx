@@ -18,7 +18,7 @@ const Reader = () => {
   const [data, setData] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [words, setWords] = useState<Record<string, string>>({});
-  const API_KEY = "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";
+  const API_KEY = "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";
 
   const [word, setWord] = useState<string>("");
   const addChip = (name: string, id: string) => {
