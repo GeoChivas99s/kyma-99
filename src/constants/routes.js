@@ -9,13 +9,15 @@ export default {
 
   HOME_PAGE: 'Home page',
   DIAGNOSTIC: 'Diagnostic',
-   
-TEXT_GENERATOR: "Text Generator",
-READER :  "Reader",
+
+  FLUENCY : "Fluency",
+
+  TEXT_GENERATOR: "Text Generator",
+  READER: "Reader",
   TERAPY: 'Terapy',
   TERAPY_DRAWER: 'Terapy Drawer',
   TERAPY_TAB: ' Terapy tab',
-
+   
   NOTIFICATIONS: 'Notifications',
   NOTIFICATIONS_DRAWER: 'Notifications Drawer',
 

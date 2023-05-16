@@ -16,6 +16,7 @@ export {default as Profile} from './home/Profile';
 // Auth Screens
 export {default as Login} from './auth/Login';
 export {default as Register} from './auth/Register';
+export {default as Fluency} from './home/Fluency';
 
 export {default as TextGenerator}  from './home/TextGenerator'
 export {default as Reader} from './home/Reader'

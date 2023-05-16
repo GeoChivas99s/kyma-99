@@ -21,10 +21,10 @@ const menuOptions = [
     id: 2
   },
   {
-    name: " Efeito Playback",
+    name: "Módulo de Fala Fluente",
     icon: "mic",
     color: COLORS.primary,
-    route: ROUTES.HOME,
+    route: ROUTES.FLUENCY,
     id: 3
   },
   {
