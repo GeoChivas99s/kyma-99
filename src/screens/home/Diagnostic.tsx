@@ -8,14 +8,14 @@ import {
 import { Audio } from "expo-av";
 import Svg, { Path } from "react-native-svg";
 import * as FileSystem from "expo-file-system";
-import { COLORS, ROUTES } from "../../constants";
+import { COLORS, TEXT } from "../../constants";
 import Icon from "react-native-vector-icons/Ionicons";
 import React, { useCallback, useEffect, useState } from "react";
 import { InterruptionModeIOS, InterruptionModeAndroid } from "expo-av";
 import { analyzeTranscription } from "../../utils";
 import Toast from "react-native-toast-message";
 import DiagnosticDialog from "../dialogs/diagnosticDialog";
-
+import { getRandomNumber } from "../../utils/getRandomNumber";
 import useData from "../../hooks/useData";
 const Diagnostic = () => {
   const [message, setMessage] = useState("");
@@ -272,6 +272,9 @@ const Diagnostic = () => {
             />
           </TouchableOpacity>
           {getRecordLines()}
+       {!Boolean(recordings?.length) && <Text>
+          {TEXT[getRandomNumber()]}
+        </Text>}
         </View>
       </View>
       <DiagnosticDialog />
