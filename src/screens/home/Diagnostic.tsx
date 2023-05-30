@@ -276,10 +276,10 @@ const Diagnostic = () => {
           {getRecordLines()}
           {!Boolean(recordings?.length) && (
             <><Text
-            style={{fontSize:16, color:"red", marginBottom:15}}
-            > Leia o Texto durante a gravação do Áudio!!! </Text>
+            style={{fontSize:18, color:"red", marginBottom:15}}
+            >Leia o texto abaixo durante a gravação!</Text>
             <Text
-             style={{fontSize:16, marginLeft:0}}>
+             style={{fontSize:16, marginLeft:0, textAlign:"justify"}}>
               {TEXT[getRandomNumber()]}
             </Text></>)}
         </View>
