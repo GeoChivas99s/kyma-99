@@ -107,7 +107,7 @@ const Diagnostic = () => {
         console.log(
           analyzeTranscription(data.results[0].alternatives[0].transcript)
         );
-        setData( analyzeTranscription(data.results[0].alternatives[0].transcript))
+        setData(analyzeTranscription(data.results[0].alternatives[0].transcript))
       })
       .catch((error) => {
         console.log(error);
@@ -120,8 +120,9 @@ const Diagnostic = () => {
       .finally(() => {
         // console.log("Foii!!");
         setIsLoading(false);
-      }); }
-  useCallback(() => {}, [message]);
+      });
+  }
+  useCallback(() => { }, [message]);
 
   useEffect(() => {
     if (message) {
@@ -251,6 +252,7 @@ const Diagnostic = () => {
             alignItems: "center",
           }}
         >
+         {!Boolean(recordings.length) && <Text style={{marginBottom:10}}>Aperte para gravar</Text>}
           <TouchableOpacity
             onPress={recording ? stopRecording : startRecording}
             style={{
@@ -272,9 +274,14 @@ const Diagnostic = () => {
             />
           </TouchableOpacity>
           {getRecordLines()}
-       {!Boolean(recordings?.length) && <Text>
-          {TEXT[getRandomNumber()]}
-        </Text>}
+          {!Boolean(recordings?.length) && (
+            <><Text
+            style={{fontSize:16, color:"red", marginBottom:15}}
+            > Leia o Texto durante a gravação do Áudio!!! </Text>
+            <Text
+             style={{fontSize:16, marginLeft:0}}>
+              {TEXT[getRandomNumber()]}
+            </Text></>)}
         </View>
       </View>
       <DiagnosticDialog />
