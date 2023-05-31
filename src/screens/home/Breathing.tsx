@@ -18,138 +18,104 @@ import {
   import { getRandomNumber } from "../../utils/getRandomNumber";
   import useData from "../../hooks/useData";
   const Breathing = () => {
-    const [message, setMessage] = useState("");
-    const [recording, setRecording] = useState<any>();
-    const [recordings, setRecordings] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const { openModal, setOpenModal, setData } = useData();
-    const RECORDING_OPTIONS = {
-      android: {
-        extension: ".m4a",
-        outputFormat: Audio.AndroidOutputFormat.MPEG_4,
-        audioEncoder: Audio.AndroidAudioEncoder.AAC,
-        sampleRate: 44100,
-        numberOfChannels: 2,
-        bitRate: 128000,
-      },
-      ios: {
-        extension: ".wav",
-        audioQuality: Audio.IOSAudioQuality.HIGH,
-        sampleRate: 44100,
-        numberOfChannels: 1,
-        bitRate: 128000,
-        linearPCMBitDepth: 16,
-        linearPCMIsBigEndian: false,
-        linearPCMIsFloat: false,
-      },
-      web: {},
-    };
-    async function startRecording() {
-      const { granted } = await Audio.getPermissionsAsync();
   
-      if (granted) {
-        try {
-          console.log("Gravando...");
-  
-          const { recording } = await Audio.Recording.createAsync(
-            RECORDING_OPTIONS
-          );
-          setRecording(recording);
-        } catch (error) {
-          console.log(error);
-        }
+    const [sound, setSound] = useState<Audio.Sound | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState(0);
+
+  const requestAudioPermission = async () => {
+    const { granted } = await Audio.getPermissionsAsync();
+    if (!granted) {
+      console.log('Permission not granted');
+      return false;
+    }
+    return true;
+  };
+
+  const loadAudio = async () => {
+    try {
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: false,
+        interruptionModeIOS: InterruptionModeIOS.DoNotMix,
+        playsInSilentModeIOS: true,
+        shouldDuckAndroid: true,
+        interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
+      });
+      const { sound: audioSound } = await Audio.Sound.createAsync(
+        require('../../assets/Audio.mp3'),
+        { shouldPlay: false }
+      );
+      setSound(audioSound);
+    } catch (error) {
+      console.log('Error loading audio: ', error);
+    }
+  };
+
+  useEffect(() => {
+    requestAudioPermission();
+    loadAudio();
+  }, []);
+
+  const playAudio = async () => {
+    try {
+      if (sound) {
+        await sound.playAsync();
+        setIsPlaying(true);
       }
+    } catch (error) {
+      console.log('Error playing audio: ', error);
     }
-    async function stopRecording() {
-      console.log("Stopping recording..");
-      setRecording(undefined);
-      await recording.stopAndUnloadAsync();
-      const uri = recording.getURI();
-      // const { sound, status } = await recording.createNewLoadedSoundAsync();
-      const base64File = await FileSystem.readAsStringAsync(uri, {
-        encoding: FileSystem?.EncodingType?.Base64,
-      });
-      await FileSystem.deleteAsync(uri);
-  
-      //generateText(base64File);
-  
-      let records: any = [...recordings];
-      records.push({
-        uri: base64File,
-      });
-  
-      setRecordings(records);
-    }
-    // 1f8caa5424bf47d09b2bcf4ef36b7f3d
-    const generateText = async (base64File: string) => {
-      // console.log(base64File)
-      setIsLoading(true);
-      fetch(
-        `https://speech.googleapis.com/v1/speech:recognize?key=AIzaSyBTqE8gOnEqle3RP_YnWlIGKMk5reIGzuQ`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            config: {
-              languageCode: "pt-BR",
-              encoding: "LINEAR16",
-              sampleRateHertz: 41000,
-            },
-            audio: {
-              content: base64File,
-            },
-          }),
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setMessage(data.results[0].alternatives[0].transcript);
-          console.log(data.results[0].alternatives[0].transcript);
-          console.log(
-            analyzeTranscription(data.results[0].alternatives[0].transcript)
-          );
-          setData(analyzeTranscription(data.results[0].alternatives[0].transcript))
-        })
-        .catch((error) => {
-          console.log(error);
-          setMessage("");
-          // Toast.show({
-          //   type: "error",
-          //   text1: "Erro ao realizar a transcrição do aúdio!",
-          // });
-        })
-        .finally(() => {
-          // console.log("Foii!!");
-          setIsLoading(false);
-        });
-    }
-    useCallback(() => { }, [message]);
-  
-    useEffect(() => {
-      if (message) {
-        setOpenModal(true);
-        setRecording(null);
-        setRecordings([]);
+  };
+
+  const pauseAudio = async () => {
+    try {
+      if (sound) {
+        await sound.pauseAsync();
+        setIsPlaying(false);
       }
-    }, [message]);
-  
-    useEffect(() => {
-      Audio.requestPermissionsAsync().then((granted) => {
-        if (granted) {
-          Audio.setAudioModeAsync({
-            allowsRecordingIOS: true,
-            interruptionModeIOS: InterruptionModeIOS.DoNotMix,
-            playsInSilentModeIOS: true,
-            shouldDuckAndroid: true,
-            interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
-            playThroughEarpieceAndroid: true,
-          });
-        }
-      });
-      //  setOpenModal(true);
-    }, []);
-  
-   
-  
+    } catch (error) {
+      console.log('Error pausing audio: ', error);
+    }
+  };
+
+  const stopAudio = async () => {
+    try {
+      if (sound) {
+        await sound.stopAsync();
+        setIsPlaying(false);
+        setTimeRemaining(0);
+      }
+    } catch (error) {
+      console.log('Error stopping audio: ', error);
+    }
+  };
+
+  const restartAudio = () => {
+    stopAudio();
+    playAudio();
+  };
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isPlaying) {
+      interval = setInterval(() => {
+        setTimeRemaining((prevTime) => prevTime - 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isPlaying]);
+
+  const startTimer = () => {
+    setTimeRemaining(60); // Defina o tempo desejado para o exercício (em segundos)
+    playAudio();
+  };
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
+
     return (
       <View
         style={{
@@ -196,12 +162,63 @@ import {
             alignItems: "center",
             }}
           >
-         
+       <View>
+      <Text style={styles.title}>Terapia de Respiração Diafragmática</Text>
+      <Text style={styles.instructions}>
+        Sente-se em uma posição confortável e relaxe. Coloque uma mão no peito e outra no abdômen.
+        Feche os olhos e inspire profundamente pelo nariz, sentindo o abdômen se expandir.
+        Em seguida, expire lentamente pela boca, esvaziando completamente o ar dos pulmões.
+      </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => (isPlaying ? pauseAudio() : startTimer())}
+      >
+        <Text style={styles.buttonText}>{isPlaying ? 'Pausar' : 'Iniciar'}</Text>
+      </TouchableOpacity>
+      {isPlaying && (
+        <TouchableOpacity style={styles.button} onPress={stopAudio}>
+          <Text style={styles.buttonText}>Parar</Text>
+        </TouchableOpacity>
+      )}
+      {!isPlaying && timeRemaining > 0 && (
+        <TouchableOpacity style={styles.button} onPress={restartAudio}>
+          <Text style={styles.buttonText}>Reiniciar</Text>
+        </TouchableOpacity>
+      )}
+      {isPlaying && (
+        <Text style={styles.timerText}>Tempo restante: {formatTime(timeRemaining)}</Text>
+      )}
+    </View>
           </View>
         </View>
       </View>
     );
   };
-  
+  const styles = {
+    title: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginBottom: 10,
+    },
+    instructions: {
+      fontSize: 16,
+      marginBottom: 20,
+    },
+    button: {
+      backgroundColor: '#007AFF',
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 5,
+    },
+    buttonText: {
+      color: '#FFFFFF',
+      fontWeight: 'bold',
+      fontSize: 16,
+    },
+    timerText: {
+      fontSize: 18,
+      marginTop: 10,
+    },
+  };
   export default Breathing;
   
