@@ -21,7 +21,7 @@ const menuOptions = [
     id: 2
   },
   {
-    name: "Módulo de Fala Fluente",
+    name: "Feedback Auditivo",
     icon: "mic",
     color: COLORS.primary,
     route: ROUTES.FLUENCY,
@@ -35,10 +35,10 @@ const menuOptions = [
     id: 4
   },
   {
-    name: "Terapia individual",
+    name: "Respiração Diafragmática ",
     icon: "man",
     color: COLORS.primary,
-    route: ROUTES.HOME,
+    route: ROUTES.BREATHING,
     id: 5
   },
   {

@@ -87,7 +87,7 @@ const Fluency = () => {
     async function startMetronome(uri: string) {
         const { sound } = await Audio.Sound.createAsync(
             { uri }, // Substitua pelo caminho correto do arquivo de som do metrônomo
-            { shouldPlay: true, isLooping: true }
+            { shouldPlay: true, isLooping: false }
         );
         setMetronomeSound(sound);
     }
@@ -197,7 +197,7 @@ const Fluency = () => {
                         color: COLORS.white,
                     }}
                 >
-                    Módulo de Fala Fluente
+                    Feedback Auditivo
                 </Text>
                 <View
                     style={{

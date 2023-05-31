@@ -11,7 +11,7 @@ export default {
   DIAGNOSTIC: 'Diagnostic',
 
   FLUENCY : "Fluency",
-
+  BREATHING : "BREATHING",
   TEXT_GENERATOR: "Text Generator",
   READER: "Reader",
   TERAPY: 'Terapy',

@@ -20,3 +20,5 @@ export {default as Fluency} from './home/Fluency';
 
 export {default as TextGenerator}  from './home/TextGenerator'
 export {default as Reader} from './home/Reader'
+
+export {default as Breathing} from './home/Breathing'
