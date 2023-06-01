@@ -74,6 +74,15 @@ const Breathing = () => {
         }
     };
 
+    const saveTimeRemaining = async () => {
+        if (sound.current) {
+          const status = await sound.current.getStatusAsync();
+          if (status.isLoaded) {
+            savedTimeRemaining.current = Math.round(status.positionMillis / 1000);
+          }
+        }
+      };
+    
     const pauseAudio = async () => {
         try {
             if (sound) {
