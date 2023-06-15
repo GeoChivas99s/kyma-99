@@ -13,7 +13,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "target": "ESNext",
-    "strict": true,
+    "strict": true
   },
   "extends": "expo/tsconfig.base"
 }

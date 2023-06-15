@@ -82,7 +82,7 @@ const Diagnostic = () => {
   }
   // 1f8caa5424bf47d09b2bcf4ef36b7f3d
   const generateText = async (base64File: string) => {
-    // console.log(base64File)
+    console.log(base64File)
     setIsLoading(true);
     fetch(
       `https://speech.googleapis.com/v1/speech:recognize?key=AIzaSyBTqE8gOnEqle3RP_YnWlIGKMk5reIGzuQ`,
@@ -111,7 +111,7 @@ const Diagnostic = () => {
       })
       .catch((error) => {
         console.log(error);
-        setMessage("");
+        setMessage("ta pico");
         // Toast.show({
         //   type: "error",
         //   text1: "Erro ao realizar a transcrição do aúdio!",
