@@ -17,6 +17,8 @@ export default {
   TERAPY: 'Terapy',
   TERAPY_DRAWER: 'Terapy Drawer',
   TERAPY_TAB: ' Terapy tab',
+
+  CHAT: "CHAT",
    
   NOTIFICATIONS: 'Notifications',
   NOTIFICATIONS_DRAWER: 'Notifications Drawer',

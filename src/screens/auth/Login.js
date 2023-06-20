@@ -36,7 +36,7 @@ export default function Login() {
         <TouchableOpacity 
         onPress={()=>navigation.navigate(ROUTES.REGISTER)}>
           <Text>
-            Ainda não tem uma conta?{" "}
+            Ainda não tem uma conta? { " "}
             <Text style={{ color: COLORS.primary }}>Criar Conta</Text>{" "}
           </Text>
         </TouchableOpacity>

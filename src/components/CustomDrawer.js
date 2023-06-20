@@ -31,6 +31,7 @@ const CustomDrawer = props => {
         <TouchableOpacity style={styles.exitButton} onPress={() => navigation.navigate(ROUTES.LOGIN)}>
           <Icon name='exit' color={COLORS.gray} size={20} />
           <Text style={{ color: COLORS.gray, marginLeft: 12, fontSize: 16 }}>
+
             Sair
           </Text>
         </TouchableOpacity>
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "90%",
     alignItems: "center",
-    justifyContent: "flex-start",
+  //  justifyContent: "flex-start",
     padding: 5,
     marginLeft: 15,
     borderRadius: 5,

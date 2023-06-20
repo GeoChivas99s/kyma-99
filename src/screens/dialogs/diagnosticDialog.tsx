@@ -1,14 +1,9 @@
 import React, { Children, useState } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import { COLORS, IMGS, ROUTES } from "../../constants";
-import { useNavigation } from "@react-navigation/native";
 import {
-  StyleSheet,
   Text,
-  View,
-  Image,
-  TouchableOpacity,
-  ScrollView,
+  View
 } from "react-native";
 import KymaModal from "../../components/KymaModal";
 import useData from "../../hooks/useData";
@@ -77,7 +72,7 @@ const DiagnosticDialog = () => {
           }}
         >
           <Text style={{ fontSize: 25, color: "white" }}>Severidade:</Text>
-          <Text style={{ fontSize: 25, color: "white" }}>{data.severity}</Text>
+          <Text style={{ fontSize: 25, color: "white" }}>{data?.severity}</Text>
         </View>
 
         <View

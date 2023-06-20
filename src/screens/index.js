@@ -18,7 +18,9 @@ export {default as Login} from './auth/Login';
 export {default as Register} from './auth/Register';
 export {default as Fluency} from './home/Fluency';
 
-export {default as TextGenerator}  from './home/TextGenerator'
-export {default as Reader} from './home/Reader'
+export {default as TextGenerator}  from './home/TextGenerator';
+export {default as Reader} from './home/Reader';
 
-export {default as Breathing} from './home/Breathing'
+export {default as Breathing} from './home/Breathing';
+
+export {default as Chat } from './home/Chat'

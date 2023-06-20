@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {StyleSheet, Platform, TouchableOpacity} from 'react-native';
 import {COLORS, ROUTES} from '../constants';
-import {Home, Exercices, Notifications, Settings} from '../screens';
+import {Home, Exercices, Notifications, Settings, Chat} from '../screens';
 import ExcercicesNavigator from './ExcercicesNavigator';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SettingsNavigator from './SettingsNavigator';
@@ -58,7 +58,7 @@ function BottomTabNavigator() {
       />
       <Tab.Screen
         name={ROUTES.NOTIFICATIONS}
-        component={Notifications}
+        component={Chat}
         options={{
           tabBarButton: props => <CustomTabBarButton {...props} />,
         }}

@@ -17,7 +17,7 @@ export const DataProvider = ({ children }) => {
     }
 
 useEffect(()=>{
-console.log("teste PAssei")
+console.log("teste PAssei 111111")
 },[])
     return (<Provider value={INITIAL_VALUES}>
         {
