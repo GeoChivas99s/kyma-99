@@ -151,7 +151,7 @@ const Fluency = () => {
                         <Text
                             style={{ color: COLORS.white, textTransform: "uppercase", fontSize: 18 }}
                         >
-                            {metronomeSound ? "Reproduzir áudio" : "Parar o áudio"}
+                            {metronomeSound ?  "Parar o áudio" : "Reproduzir áudio"}
                         </Text>
                         <Icon name="play" color={COLORS.white} size={30} />
                     </TouchableOpacity>
