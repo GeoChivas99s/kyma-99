@@ -14,7 +14,7 @@ const menuOptions = [
     id: 1
   },
   {
-    name: "Gerador de texto",
+    name: "Leitura Expressiva",
     icon: "document",
     color: COLORS.primary,
     route: ROUTES.TEXT_GENERATOR,

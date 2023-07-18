@@ -19,7 +19,7 @@ const TextGenerator = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState("");
 
-  const API_KEY = "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";
+  const API_KEY = "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";
 
   function handleFetchText() {
     setIsLoading(true);
@@ -33,7 +33,7 @@ const TextGenerator = () => {
           Authorization: `Bearer ${API_KEY}`,
         },
         body: JSON.stringify({
-          prompt,
+          prompt: prompt,
           temperature: 0.22,
           max_tokens: 500,
           top_p: 1,
@@ -44,10 +44,12 @@ const TextGenerator = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data.choices[0].text);
-        setData(data.choices[0].text);
+        // console.log(data);
+        setData(data?.choices[0]?.text);
       })
-      .catch(() => Alert.alert("Erro", "Não foi possível Gerar o texto"))
+      .catch((err) => {Alert.alert("Erro", "Não foi possível Gerar o texto")
+        console.log(err)
+    })
       .finally(() => setIsLoading(false));
   }
   const speak = () => {
@@ -106,7 +108,7 @@ const TextGenerator = () => {
             color: COLORS.white,
           }}
         >
-          Gerador de Texto
+          Leitura Expressiva
         </Text>
         <View
           style={{
