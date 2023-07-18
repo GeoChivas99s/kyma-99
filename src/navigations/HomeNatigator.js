@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Home , Diagnostic, TextGenerator, Reader , Fluency, Breathing} from '../screens';
+import {Home , Diagnostic, TextGenerator, Reader , Fluency, Breathing , SyllableCount} from '../screens';
 import {ROUTES} from '../constants';
 
 const Stack = createStackNavigator();
@@ -18,6 +18,7 @@ function HomeNatigator() {
       <Stack.Screen name={ROUTES.READER} component={Reader} />
       <Stack.Screen name={ROUTES.BREATHING} component={Breathing} />
       <Stack.Screen name={ROUTES.FLUENCY} component={Fluency} />
+      <Stack.Screen name={ROUTES.SYLLABLECOUNT} component={SyllableCount} />
     </Stack.Navigator>
   );
 }

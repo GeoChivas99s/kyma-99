@@ -24,3 +24,5 @@ export {default as Reader} from './home/Reader';
 export {default as Breathing} from './home/Breathing';
 
 export {default as Chat } from './home/Chat'
+
+export {default as SyllableCount} from './home/SyllableCount'

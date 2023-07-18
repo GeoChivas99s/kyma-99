@@ -9,6 +9,7 @@ export default {
 
   HOME_PAGE: 'Home page',
   DIAGNOSTIC: 'Diagnostic',
+  SYLLABLECOUNT : 'SyllableCount' ,
 
   FLUENCY : "Fluency",
   BREATHING : "BREATHING",

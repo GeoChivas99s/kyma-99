@@ -56,10 +56,10 @@ const menuOptions = [
     id: 7
   },
   {
-    name: "Sobre Nós",
-    icon: "book",
+    name: "Contagem Silábica",
+    icon: "clipboard",
     color: COLORS.primary,
-    route: ROUTES.HOME,
+    route: ROUTES.SYLLABLECOUNT,
     id: 8
   },
   {
