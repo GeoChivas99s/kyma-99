@@ -12,6 +12,7 @@ export default {
   SYLLABLECOUNT : 'SyllableCount' ,
 
   SOUNDPROLONGATION : 'SoundProlongation' ,
+  AUDITIVEMEMORY : 'AuditiveMemory',
 
   FLUENCY : "Fluency",
   BREATHING : "BREATHING",

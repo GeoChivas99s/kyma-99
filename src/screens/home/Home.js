@@ -42,10 +42,10 @@ const menuOptions = [
     id: 5
   },
   {
-    name: "Terapia fonoaudiológica",
+    name: "Memória Auditiva",
     icon: "mic-circle",
     color: COLORS.primary,
-    route: ROUTES.HOME,
+    route: ROUTES.AUDITIVEMEMORY,
     id: 6
   },
   {
