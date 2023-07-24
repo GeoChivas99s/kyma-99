@@ -127,6 +127,11 @@ const SyllableCount = () => {
         {isPlaying && isUserInputEnabled && (
           <Text style={styles.instructions}>Repita as palavras:</Text>
         )}
+        {isPlaying && !isUserInputEnabled && (
+          <Text style={styles.instructions}>
+            Repita as seguintes palavras após serem ditas:
+          </Text>
+        )}
         {!isPlaying && isUserInputEnabled && (
           <View style={styles.wordButtonsContainer}>
             {wordList.map((word, index) => (
@@ -142,12 +147,16 @@ const SyllableCount = () => {
         )}
         {isPlaying && (
           <Text style={styles.currentWord}>
-            Palavra Atual: {wordList[currentWordIndex]}
+            {isUserInputEnabled
+              ? `Palavra Atual: ${wordList[currentWordIndex]}`
+              : "Aguarde a fala da próxima palavra"}
           </Text>
         )}
         {showResult && (
           <View style={styles.resultContainer}>
-            <Text style={styles.result}>Palavras Faladas:</Text>
+            <Text style={styles.result}>
+              Palavras Faladas:
+            </Text>
             <View style={styles.spokenWordsContainer}>
               {spokenWords.map((word, index) => (
                 <Text key={index} style={styles.spokenWord}>
@@ -155,9 +164,29 @@ const SyllableCount = () => {
                 </Text>
               ))}
             </View>
-            <Text style={styles.result}>
-              Resultado: {userInput.every((value, index) => value === wordList[index]) ? 'Correto!' : 'Errado, Tente novamente!'}
-            </Text>
+            {isUserInputEnabled ? (
+              <Text style={styles.result}>
+                Repita as palavras restantes!
+              </Text>
+            ) : (
+              <Text
+                style={[
+                  styles.result,
+                  userInput.every(
+                    (value, index) => value === wordList[index]
+                  )
+                    ? styles.correctResult
+                    : styles.wrongResult,
+                ]}
+              >
+                Resultado:{" "}
+                {userInput.every(
+                  (value, index) => value === wordList[index]
+                )
+                  ? "Correto!"
+                  : "Errado, Tente novamente!"}
+              </Text>
+            )}
           </View>
         )}
       </View>
@@ -235,6 +264,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     color: '#007AFF',
+  },
+  correctResult: {
+    color: 'green',
+  },
+  wrongResult: {
+    color: 'red',
   },
 });
 
