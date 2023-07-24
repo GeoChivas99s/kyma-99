@@ -1,5 +1,5 @@
 
-import { View, Text, TouchableOpacity, Dimensions } from "react-native";
+import { View, Text, TouchableOpacity, Dimensions , StyleSheet } from "react-native";
 import { Audio } from "expo-av";
 import * as Speech from 'expo-speech';
   import Svg, { Path } from "react-native-svg";
@@ -7,72 +7,33 @@ import * as Speech from 'expo-speech';
   import React, { useCallback, useEffect, useState } from "react";
   
   const SyllableCount = () => {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [syllablesCount, setSyllablesCount] = useState(0);
-    const [currentPhrase, setCurrentPhrase] = useState(0);
-  
-    const phrases = [
-      "Olá, como vai você?",
-      "Hoje é um belo dia",
-      "Vamos fazer um passeio",
-      "Conte quantas sílabas têm",
-      "Isso é muito divertido",
+    const [currentWordIndex, setCurrentWordIndex] = useState(0);
+
+    const words = [
+      'Hipopótamo',
+      'Paralelepípedo',
+      'Extravagante',
+      'Floccinaucinihilipilificação',
+      'Pneumoultramicroscopicossilicovulcanoconiótico',
     ];
   
-    const startTherapy = async () => {
-      setIsPlaying(true);
-      setCurrentPhrase(0);
-      await handlePlay();
-    };
-  
-    const stopTherapy = () => {
-      setIsPlaying(false);
-      setCurrentPhrase(0);
-      setSyllablesCount(0);
-      Speech.stop();
-    };
-  
-    const handlePlay = async () => {
-      if (currentPhrase < phrases.length) {
-        const phrase = phrases[currentPhrase];
-        const count = countSyllables(phrase);
-        setSyllablesCount(count);
-  
-        await new Promise<void>((resolve) => {
-          Speech.speak(phrase, {
-            onDone: () => {
-              setCurrentPhrase((prevPhrase) => prevPhrase + 1);
-              resolve();
-            },
-            onError: () => {
-              stopTherapy();
-              resolve();
-            },
-          });
-        });
-  
-        await handlePlay();
-      } else {
-        setIsPlaying(false);
-        setCurrentPhrase(0);
-        setSyllablesCount(0);
-      }
-    };
-  
-    const countSyllables = (text: string) => {
-      const words = text.split(" ");
-      let count = 0;
-  
-      words.forEach((word) => {
-        const regex = /[aeiou]/gi;
-        const vowels = word.match(regex);
-        count += vowels ? vowels.length : 0;
+    const speakWord = () => {
+
+      Speech.speak(words[currentWordIndex], {
+        language: "pt-PT",
+        pitch: 1,
+        rate: .7,
       });
-  
-      return count;
+     
     };
   
+    const handleNextWord = () => {
+      setCurrentWordIndex((prevIndex) => (prevIndex < words.length - 1 ? prevIndex + 1 : prevIndex));
+    };
   
+    const handlePreviousWord = () => {
+      setCurrentWordIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+    };
     return (
       <View
         style={{
@@ -115,7 +76,7 @@ import * as Speech from 'expo-speech';
       <View
         style={{
           marginTop: 10,
-          borderWidth: 3,
+         // borderWidth: 3,
           padding: 10,
           height: "80%",
           justifyContent: "center",
@@ -123,43 +84,60 @@ import * as Speech from 'expo-speech';
           //paddingRight: 100,
         }}
       >
-    <Text style={styles.title}>Terapia de Contagem Silábica</Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => (isPlaying ? stopTherapy() : startTherapy())}
-      >
-        <Text style={styles.buttonText}>{isPlaying ? "Parar" : "Iniciar"}</Text>
-      </TouchableOpacity>
-      {isPlaying && (
-        <Text style={styles.countText}>Conte as sílabas: {syllablesCount}</Text>
-      )}
+   <View style={styles.container}>
+      <Text style={styles.title}>Terapia de Prolongamento do Som</Text>
+      <Text style={styles.word}>{words[currentWordIndex]}</Text>
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity style={styles.button} onPress={speakWord}>
+          <Text style={styles.buttonText}>Pronunciar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handlePreviousWord}>
+          <Text style={styles.buttonText}>Recuar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleNextWord}>
+          <Text style={styles.buttonText}>Avançar</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
       </View>
         </View>
       </View>
     );
   };
   
-  const styles = {
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 20,
+    },
     title: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginBottom: 20,
+    },
+    word: {
       fontSize: 20,
-      fontWeight: "bold",
-      marginBottom: 10,
+      fontWeight: 'bold',
+      marginBottom: 30,
+    },
+    buttonsContainer: {
+      flexDirection: 'row',
     },
     button: {
-      backgroundColor: "#007AFF",
-      paddingVertical: 10,
-      paddingHorizontal: 20,
-      borderRadius: 5,
+      backgroundColor: '#007AFF',
+      paddingVertical: 12,
+      paddingHorizontal: 24,
+      borderRadius: 8,
+      marginHorizontal: 8,
     },
     buttonText: {
-      color: "#FFFFFF",
-      fontWeight: "bold",
+      color: '#FFFFFF',
+      fontWeight: 'bold',
       fontSize: 16,
     },
-    countText: {
-      fontSize: 18,
-      marginTop: 10,
-    },
-  };
+  });
+  
   export default SyllableCount;
   
