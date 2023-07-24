@@ -11,6 +11,8 @@ export default {
   DIAGNOSTIC: 'Diagnostic',
   SYLLABLECOUNT : 'SyllableCount' ,
 
+  SOUNDPROLONGATION : 'SoundProlongation' ,
+
   FLUENCY : "Fluency",
   BREATHING : "BREATHING",
   TEXT_GENERATOR: "Text Generator",

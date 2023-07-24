@@ -49,10 +49,10 @@ const menuOptions = [
     id: 6
   },
   {
-    name: "leitura",
-    icon: "book",
+    name: "Prolongamento de Som",
+    icon: "musical-notes",
     color: COLORS.primary,
-    route: ROUTES.HOME,
+    route: ROUTES.SOUNDPROLONGATION,
     id: 7
   },
   {
