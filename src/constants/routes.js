@@ -9,7 +9,7 @@ export default {
 
   HOME_PAGE: 'Home page',
   DIAGNOSTIC: 'Diagnostic',
-  SYLLABLECOUNT : 'SyllableCount' ,
+  CREATIVEVISUALISATION : 'CreativeVisualisation' ,
 
   SOUNDPROLONGATION : 'SoundProlongation' ,
   AUDITIVEMEMORY : 'AuditiveMemory',

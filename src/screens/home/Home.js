@@ -56,10 +56,10 @@ const menuOptions = [
     id: 7
   },
   {
-    name: "Contagem Silábica",
+    name: "Visualização Criativa",
     icon: "clipboard",
     color: COLORS.primary,
-    route: ROUTES.SYLLABLECOUNT,
+    route: ROUTES.CREATIVEVISUALISATION,
     id: 8
   },
   {
