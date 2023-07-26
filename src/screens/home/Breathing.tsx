@@ -3,7 +3,7 @@ import {
     View,
     Dimensions,
     TouchableOpacity,
-    ActivityIndicator,
+    StyleSheet,
 } from "react-native";
 import { Audio } from "expo-av";
 import Svg, { Path } from "react-native-svg";
@@ -203,7 +203,7 @@ const Breathing = () => {
         </View>
     );
 };
-const styles = {
+const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -228,5 +228,5 @@ const styles = {
         fontSize: 18,
         marginTop: 10,
     },
-};
+});
 export default Breathing;
