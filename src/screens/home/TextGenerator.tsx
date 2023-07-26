@@ -19,7 +19,7 @@ const TextGenerator = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState("");
 
-  const API_KEY = "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";
+  const API_KEY = "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";
 
   function handleFetchText() {
     setIsLoading(true);
