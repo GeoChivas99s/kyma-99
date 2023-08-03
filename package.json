@@ -1,10 +1,10 @@
 {
-  "name": "kyma-99",
+  "name": "kymaproject",
   "version": "1.0.0",
   "license": "ISC",
   "author": "GeoChivas99",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web"
@@ -40,7 +40,11 @@
     "react-native-svg": "13.4.0",
     "react-native-toast-message": "^2.1.6",
     "react-native-vector-icons": "^9.2.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "expo-modules-autolinking": "~1.1.0",
+    "@react-native-firebase/app": "17.4.0",
+    "@react-native-firebase/auth": "17.4.0",
+    "@react-native-firebase/database": "17.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

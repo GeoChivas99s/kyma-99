@@ -6,14 +6,35 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
-
+import auth from "@react-native-firebase/auth";
 import { COLORS, ROUTES, IMGS } from "../../constants";
+import LoadingSpinner from "../../components/progressBar";
 
 export default function Login() {
   const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const isValidValues = () => Boolean(email) && Boolean(password);
+  const handleSigIn = () => {
+    setIsLoading(true);
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((response) => {
+        if (response) {
+          navigation.navigate(ROUTES.HOME);
+        }
+      })
+      .catch((err) => Alert.alert("Usuário ou senha inválida"))
+
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -21,22 +42,34 @@ export default function Login() {
         <View style={styles.imageWrapper}>
           <Image style={styles.img} source={IMGS.logo} />
         </View>
-        <TextInput style={styles.formImput} placeholder="Email" />
-        <TextInput style={styles.formImput} placeholder="Senha" />
-
+        <TextInput
+          value={email}
+          style={styles.formImput}
+          placeholder="Email"
+          onChangeText={(text) => setEmail(text)}
+        
+        />
+        <TextInput
+          value={password}
+          style={styles.formImput}
+          secureTextEntry={true}
+          onChangeText={(text) => setPassword(text)}
+          placeholder="Senha"
+        />
+      
         <TouchableOpacity
+          disabled={!isValidValues()}
           style={styles.buttonLogin}
-          onPress={() => navigation.navigate(ROUTES.HOME)}
+          onPress={handleSigIn}
         >
-          <Text style={styles.text}> Entrar</Text>
+        {isLoading ?   <LoadingSpinner color="white" /> :  <Text style={styles.text}> Entrar</Text>}  
         </TouchableOpacity>
         <Text style={{ color: COLORS.primary }}>Esqueceu a senha?</Text>
       </View>
       <View style={styles.registerWrapper}>
-        <TouchableOpacity 
-        onPress={()=>navigation.navigate(ROUTES.REGISTER)}>
+        <TouchableOpacity onPress={() => navigation.navigate(ROUTES.REGISTER)}>
           <Text>
-            Ainda não tem uma conta? { " "}
+            Ainda não tem uma conta?{" "}
             <Text style={{ color: COLORS.primary }}>Criar Conta</Text>{" "}
           </Text>
         </TouchableOpacity>
@@ -56,7 +89,7 @@ const styles = StyleSheet.create({
     padding: 5,
     height: 100,
     borderRadius: 50,
-     marginBottom:20,
+    marginBottom: 20,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: COLORS.primary,

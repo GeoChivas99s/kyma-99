@@ -12,7 +12,7 @@ import * as FileSystem from "expo-file-system";
 import { COLORS, TEXT } from "../../constants";
 import Icon from "react-native-vector-icons/Ionicons";
 import React, { useCallback, useEffect, useState } from "react";
-
+import LoadingSpinner from "../../components/progressBar";
 const Chat = () => {
 
 
@@ -54,6 +54,7 @@ const Chat = () => {
           }}
         >
           Diagnóstico
+         
         </Text>
     <View
       style={{

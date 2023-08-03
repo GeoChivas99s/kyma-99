@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "771416502793",
+    "project_id": "kymaproject-50ac8",
+    "storage_bucket": "kymaproject-50ac8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771416502793:android:8f35c0c161376b1030fed8",
+        "android_client_info": {
+          "package_name": "com.kymaproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771416502793-rb06dmq0jr6jac7deh5qh533aj184l69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_XunE9yjhMw8T2xPnH5z-Pa7lfvoT9oI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771416502793-rb06dmq0jr6jac7deh5qh533aj184l69.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "771416502793-ik9g73a0uisuvqvttqdqmadelsluq7hp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kymaproject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
