@@ -27,10 +27,11 @@ export default function Login() {
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
         if (response) {
+          setEmail('')
+          setPassword('')
           navigation.navigate(ROUTES.HOME);
+          console.log(response)
         }
-        setEmail('')
-        setPassword('')
       })
       .catch((err) => Alert.alert("Usuário ou senha inválida"))
 
