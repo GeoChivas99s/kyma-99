@@ -11,7 +11,7 @@ import {
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
 import auth from "@react-native-firebase/auth";
-import firestore, { serverTimestamp } from "@react-native-firebase/firestore";
+import firestore from "@react-native-firebase/firestore";
 import { COLORS, ROUTES, IMGS } from "../../constants";
 import LoadingSpinner from "../../components/progressBar";
 
@@ -28,26 +28,33 @@ const Register = () => {
     Boolean(email) &&
     Boolean(phoneNumber);
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     setIsLoading(true);
-    firestore()
-      .collection("users")
-      .add({
-        name: name,
-        email: email,
-        phoneNumber: phoneNumber,
-        created_at: firestore.FieldValue.serverTimestamp(),
-      })
-      .then((response) => {
-        if (response) {
-          Alert.alert("Usuário adicionado com sucesso!");
-          console.log("User added!");
-        }
-      })
-      .catch((err) => Alert.alert("Erro ao criar o usuário!!"))
-      .finally(() => {
-        setIsLoading(false);
-      });
+    const response = await auth().createUserWithEmailAndPassword(
+      email,
+      password
+    );
+
+    if (response.user) {
+      firestore()
+        .collection("users")
+        .add({
+          name: name,
+          email: email,
+          phoneNumber: phoneNumber,
+          created_at: firestore.FieldValue.serverTimestamp(),
+        })
+        .then((response) => {
+          if (response) {
+            Alert.alert("Usuário adicionado com sucesso!");
+            console.log("User added!");
+          }
+        })
+        .catch((err) => Alert.alert("Erro ao criar o usuário!!"))
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   };
 
   return (
@@ -88,7 +95,7 @@ const Register = () => {
           onPress={handleRegister}
         >
           {isLoading ? (
-            <LoadingSpinner />
+            <LoadingSpinner color="white" />
           ) : (
             <Text style={styles.text}>Registar</Text>
           )}
