@@ -9,10 +9,35 @@ import {
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
-
+import auth from "@react-native-firebase/auth";
+import firestore, { serverTimestamp } from "@react-native-firebase/firestore";
 import { COLORS, ROUTES, IMGS } from "../../constants";
 const Register = () => {
   const navigation = useNavigation();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+
+  const isValid = () =>
+    Boolean(name) &&
+    Boolean(password) &&
+    Boolean(email) &&
+    Boolean(phoneNumber);
+
+  const handleRegister = () => {
+    firestore()
+      .collection("users")
+      .add({
+        name: name,
+        email: email,
+        phoneNumber: phoneNumber,
+        created_at: firestore.FieldValue.serverTimestamp(),
+      })
+      .then(() => {
+        console.log("User added!");
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -20,23 +45,36 @@ const Register = () => {
         <View style={styles.imageWrapper}>
           <Image style={styles.img} source={IMGS.logo} />
         </View>
-        <TextInput style={styles.formImput} placeholder="Nome" />
+        <TextInput
+          style={styles.formImput}
+          placeholder="Nome"
+          value={name}
+          onChangeText={(text) => setName(text)}
+        />
         <TextInput
           style={styles.formImput}
           keyboardType="numeric"
           placeholder="Telefone"
+          value={phoneNumber}
+          onChangeText={(text) => setPhoneNumber(text)}
         />
         <TextInput
           style={styles.formImput}
           keyboardType="email-address"
           placeholder="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
         />
-        <TextInput style={styles.formImput} placeholder="Senha" />
-        <TextInput style={styles.formImput} placeholder="Repetir Senha" />
+        <TextInput
+          style={styles.formImput}
+          placeholder="Senha"
+          onChangeText={(text) => setPassword(text)}
+        />
 
         <TouchableOpacity
           style={styles.buttonLogin}
-          onPress={() => navigation.navigate(ROUTES.HOME)}
+          disabled={!isValid()}
+          onPress={handleRegister}
         >
           <Text style={styles.text}>Registar</Text>
         </TouchableOpacity>

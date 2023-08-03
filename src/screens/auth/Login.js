@@ -50,12 +50,14 @@ export default function Login() {
           value={email}
           style={styles.formImput}
           placeholder="Email"
+      
           onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           value={password}
           style={styles.formImput}
-          secureTextEntry={true}
+          secureTextEntry
+         
           onChangeText={(text) => setPassword(text)}
           placeholder="Senha"
         />
