@@ -19,6 +19,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
   const isValidValues = () => Boolean(email) && Boolean(password);
   const handleSigIn = () => {
     setIsLoading(true);
@@ -28,6 +29,8 @@ export default function Login() {
         if (response) {
           navigation.navigate(ROUTES.HOME);
         }
+        setEmail('')
+        setPassword('')
       })
       .catch((err) => Alert.alert("Usuário ou senha inválida"))
 
@@ -47,7 +50,6 @@ export default function Login() {
           style={styles.formImput}
           placeholder="Email"
           onChangeText={(text) => setEmail(text)}
-        
         />
         <TextInput
           value={password}
@@ -56,13 +58,17 @@ export default function Login() {
           onChangeText={(text) => setPassword(text)}
           placeholder="Senha"
         />
-      
+
         <TouchableOpacity
           disabled={!isValidValues()}
           style={styles.buttonLogin}
           onPress={handleSigIn}
         >
-        {isLoading ?   <LoadingSpinner color="white" /> :  <Text style={styles.text}> Entrar</Text>}  
+          {isLoading ? (
+            <LoadingSpinner color="white" />
+          ) : (
+            <Text style={styles.text}> Entrar</Text>
+          )}
         </TouchableOpacity>
         <Text style={{ color: COLORS.primary }}>Esqueceu a senha?</Text>
       </View>
