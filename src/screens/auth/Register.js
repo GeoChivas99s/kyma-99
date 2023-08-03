@@ -6,19 +6,22 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
 import auth from "@react-native-firebase/auth";
 import firestore, { serverTimestamp } from "@react-native-firebase/firestore";
 import { COLORS, ROUTES, IMGS } from "../../constants";
+import LoadingSpinner from "../../components/progressBar";
+
 const Register = () => {
   const navigation = useNavigation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const isValid = () =>
     Boolean(name) &&
     Boolean(password) &&
@@ -26,6 +29,7 @@ const Register = () => {
     Boolean(phoneNumber);
 
   const handleRegister = () => {
+    setIsLoading(true);
     firestore()
       .collection("users")
       .add({
@@ -34,8 +38,15 @@ const Register = () => {
         phoneNumber: phoneNumber,
         created_at: firestore.FieldValue.serverTimestamp(),
       })
-      .then(() => {
-        console.log("User added!");
+      .then((response) => {
+        if (response) {
+          Alert.alert("Usuário adicionado com sucesso!");
+          console.log("User added!");
+        }
+      })
+      .catch((err) => Alert.alert("Erro ao criar o usuário!!"))
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -76,7 +87,11 @@ const Register = () => {
           disabled={!isValid()}
           onPress={handleRegister}
         >
-          <Text style={styles.text}>Registar</Text>
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <Text style={styles.text}>Registar</Text>
+          )}
         </TouchableOpacity>
         <Text style={{ color: COLORS.primary }}>Voltar e fazer Login!</Text>
       </View>
