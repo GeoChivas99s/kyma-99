@@ -14,6 +14,7 @@ export default async function onDisplayNotification(props:notifeeProps) {
   const channelId = await notifee.createChannel({
     id: "1234",
     name: "Default Channel",
+    vibration: true
   });
 
   // Display a notification
