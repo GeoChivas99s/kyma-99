@@ -63,6 +63,7 @@ const TextGenerator = () => {
   const stopSpeak = () => {
     Speech.stop();
   };
+  
   const pauseAndResumeSpeak = async () => {
     const isSpeaking = await Speech.isSpeakingAsync();
     isSpeaking ? Speech.pause() : Speech.resume();

@@ -72,6 +72,11 @@ const SoundProlongation = () => {
       rate: 0.7,
     });
   };
+  useEffect(()=>{
+    return (()=> {
+      Speech.stop()
+    })
+  },[])
 
   const handleNextWord = () => {
     setCurrentWordIndex((prevIndex) =>

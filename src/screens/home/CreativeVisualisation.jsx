@@ -62,6 +62,9 @@ useEffect(()=>{
     pitch: 1,
     rate: 1,
   });
+  return (()=> {
+    Speech.stop()
+  })
 },[currentScene])
   return (
     <View
