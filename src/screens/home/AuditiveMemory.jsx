@@ -10,7 +10,7 @@ import * as Speech from "expo-speech";
 import Svg, { Path } from "react-native-svg";
 import { COLORS, TEXT } from "../../constants";
 import React, { useCallback, useEffect, useState } from "react";
-
+import { onDisplayNotification } from "../../utils";
 const AuditiveMemory = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [wordList, setWordList] = useState([]);
@@ -34,6 +34,10 @@ const AuditiveMemory = () => {
   ];
 
   const startTherapy = async () => {
+    onDisplayNotification({
+      title: "Terapia de Memória auditiva iniciada!",
+      body: `Seja paciente tudo é um processo !!`,
+    });
     setIsPlaying(true);
     setCurrentWordIndex(0);
     setUserInput([]);
@@ -46,6 +50,10 @@ const AuditiveMemory = () => {
   };
 
   const stopTherapy = () => {
+    onDisplayNotification({
+      title: "Terapia de Memória auditiva encerrada!",
+      body: `Parabens voce está mais próxima do resultado!!`,
+    });
     setIsPlaying(false);
     setCurrentWordIndex(0);
     setUserInput([]);
@@ -91,6 +99,10 @@ const AuditiveMemory = () => {
     );
     setIsGameFinished(isCorrect);
     setShowResult(true);
+    onDisplayNotification({
+      title: "Terapia de Memória auditiva encerrada!",
+      body: `Parabens voce está mais próxima do resultado!!`,
+    });
   };
 
   const wait = (ms) => {
