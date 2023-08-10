@@ -14,7 +14,7 @@ import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
 import { COLORS, ROUTES, IMGS } from "../../constants";
 import LoadingSpinner from "../../components/progressBar";
-
+import Toast from "react-native-toast-message";
 const Register = () => {
   const navigation = useNavigation();
   const [name, setName] = useState("");
@@ -46,11 +46,20 @@ const Register = () => {
         })
         .then((response) => {
           if (response) {
-            Alert.alert("Usuário adicionado com sucesso!");
-            console.log("User added!");
+            Toast.show({
+              type: "success",
+              text1: "Usuário cadastrado com sucesso!",
+              text2: "Faça login para iniciar a sessão!",
+            });
           }
+          navigation.navigate(ROUTES.LOGIN)
         })
-        .catch((err) => Alert.alert("Erro ao criar o usuário!!"))
+        .catch((err) =>
+          Toast.show({
+            type: "error",
+            text1: "Erro ao cadastrar o usuário!",
+          })
+        )
         .finally(() => {
           setIsLoading(false);
         });
