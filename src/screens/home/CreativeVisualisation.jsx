@@ -1,4 +1,3 @@
-
 import {
   Text,
   View,
@@ -6,7 +5,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Button,
-  StyleSheet
+  StyleSheet,
 } from "react-native";
 import { Audio } from "expo-av";
 import Svg, { Path } from "react-native-svg";
@@ -38,7 +37,7 @@ const CreativeVisualisation = () => {
       setCurrentScene(scenes[sceneIndex]);
       const timer = setTimeout(() => {
         if (sceneIndex < scenes.length - 1) {
-          setSceneIndex(prevIndex => prevIndex + 1);
+          setSceneIndex((prevIndex) => prevIndex + 1);
         } else {
           stopVisualization();
         }
@@ -56,16 +55,18 @@ const CreativeVisualisation = () => {
     setIsVisualizationStarted(false);
   };
 
-useEffect(()=>{
-  Speech.speak(currentScene, {
-    language: "pt-PT",
-    pitch: 1,
-    rate: 1,
-  });
-  return (()=> {
-    Speech.stop()
-  })
-},[currentScene])
+  useEffect(() => {
+    if (currentScene) {
+      Speech.speak(currentScene, {
+        language: "pt-PT",
+        pitch: 1,
+        rate: 1,
+      });
+    }
+    return () => {
+      Speech.stop();
+    };
+  }, [currentScene]);
   return (
     <View
       style={{
@@ -105,45 +106,50 @@ useEffect(()=>{
         >
           Visualização criativa
         </Text>
-    <View
-      style={{
-        marginTop: 10,
-        padding: 10,
-        height: "80%",
-        justifyContent: "center",
-        alignItems: "center",
-       // paddingRight: 100,
-  
-      }}
-    >
-<View style={styles.container}>
-      <Text style={styles.title}>Terapia de Visualização Criativa</Text>
-      {!isVisualizationStarted ? (
-        <TouchableOpacity style={styles.button} onPress={startVisualization}>
-          <Text style={styles.buttonText}>Iniciar Visualização</Text>
-        </TouchableOpacity>
-      ) : (
-        <View>
-          <Text style={styles.instruction}>
-            Encontre um local tranquilo e confortável onde você possa relaxar.
-          </Text>
-          <Text style={styles.instruction}>
-            Feche os olhos e comece a respirar profundamente e calmamente.
-          </Text>
-          <Text style={styles.scene}>{currentScene}</Text>
-          <TouchableOpacity style={styles.button} onPress={stopVisualization}>
-            <Text style={styles.buttonText}>Encerrar Visualização</Text>
-          </TouchableOpacity>
+        <View
+          style={{
+            marginTop: 10,
+            padding: 10,
+            height: "80%",
+            justifyContent: "center",
+            alignItems: "center",
+            // paddingRight: 100,
+          }}
+        >
+          <View style={styles.container}>
+            <Text style={styles.title}>Terapia de Visualização Criativa</Text>
+            {!isVisualizationStarted ? (
+              <TouchableOpacity
+                style={styles.button}
+                onPress={startVisualization}
+              >
+                <Text style={styles.buttonText}>Iniciar Visualização</Text>
+              </TouchableOpacity>
+            ) : (
+              <View>
+                <Text style={styles.instruction}>
+                  Encontre um local tranquilo e confortável onde você possa
+                  relaxar.
+                </Text>
+                <Text style={styles.instruction}>
+                  Feche os olhos e comece a respirar profundamente e calmamente.
+                </Text>
+                <Text style={styles.scene}>{currentScene}</Text>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={stopVisualization}
+                >
+                  <Text style={styles.buttonText}>Encerrar Visualização</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
         </View>
-      )}
-    </View>
-    </View>
       </View>
-    {/* //   <DiagnosticDialog /> */}
+      {/* //   <DiagnosticDialog /> */}
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -151,8 +157,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-   
-   // backgroundColor: "#F5F5F5",
+
+    // backgroundColor: "#F5F5F5",
   },
   title: {
     fontSize: 24,
