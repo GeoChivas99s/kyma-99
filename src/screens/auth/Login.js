@@ -14,28 +14,44 @@ import auth from "@react-native-firebase/auth";
 import { COLORS, ROUTES, IMGS } from "../../constants";
 import LoadingSpinner from "../../components/progressBar";
 import Toast from "react-native-toast-message";
+import firestore from "@react-native-firebase/firestore";
+import useData from "../../hooks/useData";
 export default function Login() {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const { setUserData, userData } = useData();
   const isValidValues = () => Boolean(email) && Boolean(password);
+
+  const getCurrentUser = (email) => {
+    firestore()
+      .collection("users")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((documentSnapshot) => {
+          if (email === documentSnapshot.data().email) {
+            setUserData(documentSnapshot.data());
+          }
+        });
+      });
+  };
+
   const handleSigIn = () => {
     setIsLoading(true);
     auth()
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
         if (response) {
-          setEmail("");
-          setPassword("");
+          getCurrentUser(email);
           navigation.navigate(ROUTES.HOME);
           Toast.show({
             type: "success",
             text1: "Seja bem vindo!",
             text2: "Ao seu assistente de terapia!",
-
-          })
+          });
+          setEmail("");
+          setPassword("");
         }
       })
       .catch((err) =>
@@ -49,7 +65,11 @@ export default function Login() {
         setIsLoading(false);
       });
   };
-
+ useEffect(()=>{
+  if(userData){
+     console.log(userData)
+  }
+ },[])
   return (
     <View style={styles.container}>
       <View style={styles.formWrapper}>
