@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import auth from "@react-native-firebase/auth";
 import { COLORS, ROUTES, IMGS } from "../../constants";
 import LoadingSpinner from "../../components/progressBar";
-
+import Toast from "react-native-toast-message";
 export default function Login() {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
@@ -27,13 +27,18 @@ export default function Login() {
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
         if (response) {
-          setEmail('')
-          setPassword('')
+          setEmail("");
+          setPassword("");
           navigation.navigate(ROUTES.HOME);
-          console.log(response)
+          console.log(response);
         }
       })
-      .catch((err) => Alert.alert("Usuário ou senha inválida"))
+      .catch((err) =>
+        Toast.show({
+          type: "error",
+          text1: "Usuário ou senha inválida!",
+        })
+      )
 
       .finally(() => {
         setIsLoading(false);
@@ -50,14 +55,12 @@ export default function Login() {
           value={email}
           style={styles.formImput}
           placeholder="Email"
-      
           onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           value={password}
           style={styles.formImput}
           secureTextEntry
-         
           onChangeText={(text) => setPassword(text)}
           placeholder="Senha"
         />
