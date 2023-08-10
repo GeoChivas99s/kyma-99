@@ -14,6 +14,7 @@ import * as FileSystem from "expo-file-system";
 import { COLORS, TEXT } from "../../constants";
 import Icon from "react-native-vector-icons/Ionicons";
 import React, { useCallback, useEffect, useState } from "react";
+import * as Speech from "expo-speech";
 
 const CreativeVisualisation = () => {
   const scenes = [
@@ -41,7 +42,7 @@ const CreativeVisualisation = () => {
         } else {
           stopVisualization();
         }
-      }, 10000); // Aumentamos o tempo de visualização para 10 segundos
+      }, 20000); // Aumentamos o tempo de visualização para 10 segundos
       return () => clearTimeout(timer);
     }
   }, [isVisualizationStarted, sceneIndex]);
@@ -55,6 +56,13 @@ const CreativeVisualisation = () => {
     setIsVisualizationStarted(false);
   };
 
+useEffect(()=>{
+  Speech.speak(currentScene, {
+    language: "pt-PT",
+    pitch: 1,
+    rate: 1,
+  });
+},[currentScene])
   return (
     <View
       style={{
@@ -82,7 +90,7 @@ const CreativeVisualisation = () => {
           paddingLeft: 20,
           paddingRight: 20,
           //borderWidth: 1,
-          // padding: 5,,
+          // padding: 5,
         }}
       >
         <Text
@@ -92,7 +100,7 @@ const CreativeVisualisation = () => {
             color: COLORS.white,
           }}
         >
-          Contagem Silábica
+          Visualização criativa
         </Text>
     <View
       style={{
@@ -101,7 +109,8 @@ const CreativeVisualisation = () => {
         height: "80%",
         justifyContent: "center",
         alignItems: "center",
-        paddingRight: 100,
+       // paddingRight: 100,
+  
       }}
     >
 <View style={styles.container}>
@@ -139,6 +148,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+   
    // backgroundColor: "#F5F5F5",
   },
   title: {
