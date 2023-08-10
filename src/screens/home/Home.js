@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import ExerciceDialog from "../dialogs/ExerciceDialog";
 import auth from "@react-native-firebase/auth";
+import useData from "../../hooks/useData";
 const menuOptions = [
   {
     name: "Diagnóstico",
@@ -81,7 +82,7 @@ const menuOptions = [
 const Home = () => {
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
-
+  const {userData} = useData();
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -119,7 +120,7 @@ const Home = () => {
         <Image style={styles.img} source={IMGS.bgPattern} />
         <View style={styles.overlay}></View>
         <View style={styles.bannerContent}>
-          <Text style={styles.bannerContentTitle}>Olá Geovane</Text>
+          <Text style={styles.bannerContentTitle}>Olá {userData?.name}</Text>
           <Text style={styles.bannerContentText}>
             Bem vindo ao seu assistente de terapia!
           </Text>

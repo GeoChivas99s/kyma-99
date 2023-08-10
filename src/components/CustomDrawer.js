@@ -18,8 +18,11 @@ const { width } = Dimensions.get("screen");
 import { useNavigation } from "@react-navigation/native";
 import auth from "@react-native-firebase/auth";
 import Toast from "react-native-toast-message";
+import useData from "../hooks/useData";
 const CustomDrawer = (props) => {
   const navigation = useNavigation();
+const {setUserData}  = useData()
+
   const handleSignOut = () => {
     auth()
       .signOut()
@@ -28,6 +31,7 @@ const CustomDrawer = (props) => {
           type: "info",
           text1: "Sessão encerrada com sucesso!",
         });
+        setUserData({});
         navigation.navigate(ROUTES.LOGIN);
       })
       .catch(() => {

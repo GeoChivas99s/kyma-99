@@ -1,7 +1,7 @@
 export default {
   bgPattern: require('../assets/drawer-cover.jpeg'),
   banner: require('../assets/fullBanner.jpg'),
-  user: require('../assets/lindo.jpeg'),
+  user: require('../assets/avatar12q.webp'),
   logo: require('../assets/logo.png'),
   step1: require('../assets/Step-1.jpg.jpeg'),
   step2: require('../assets/Step-2.jpg.jpeg'),
