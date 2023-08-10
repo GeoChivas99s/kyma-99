@@ -82,6 +82,9 @@ const Home = () => {
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
 
+
+  
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };

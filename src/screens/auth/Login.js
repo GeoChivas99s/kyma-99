@@ -30,7 +30,12 @@ export default function Login() {
           setEmail("");
           setPassword("");
           navigation.navigate(ROUTES.HOME);
-          console.log(response);
+          Toast.show({
+            type: "success",
+            text1: "Seja bem vindo!",
+            text2: "Ao seu assistente de terapia!",
+
+          })
         }
       })
       .catch((err) =>

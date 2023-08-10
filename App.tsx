@@ -11,7 +11,7 @@ export default function App() {
     <NavigationContainer>
       <DataProvider>
         <AuthNavigator />
-        <Toast position="top" topOffset={90} visibilityTime={2000} />
+        <Toast position="top" topOffset={80} visibilityTime={2000} />
       </DataProvider>
       {/* {isAuthenticated ? AuthNavigator : DrawerNavigator } */}
     </NavigationContainer>
