@@ -65,11 +65,6 @@ export default function Login() {
         setIsLoading(false);
       });
   };
- useEffect(()=>{
-  if(userData){
-     console.log(userData)
-  }
- },[])
   return (
     <View style={styles.container}>
       <View style={styles.formWrapper}>
