@@ -16,6 +16,9 @@ import LoadingSpinner from "../../components/progressBar";
 import Toast from "react-native-toast-message";
 import firestore from "@react-native-firebase/firestore";
 import useData from "../../hooks/useData";
+
+import { onDisplayNotification } from "../../utils";
+
 export default function Login() {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
@@ -65,6 +68,7 @@ export default function Login() {
         setIsLoading(false);
       });
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.formWrapper}>

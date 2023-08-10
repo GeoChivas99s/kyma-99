@@ -32,6 +32,7 @@
     },
     "plugins": [
       "@react-native-firebase/app",
+      "@notifee/react-native",
       "expo-build-properties",
       [
         "expo-build-properties",

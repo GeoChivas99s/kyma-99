@@ -15,6 +15,8 @@ import firestore from "@react-native-firebase/firestore";
 import { COLORS, ROUTES, IMGS } from "../../constants";
 import LoadingSpinner from "../../components/progressBar";
 import Toast from "react-native-toast-message";
+import { onDisplayNotification } from "../../utils";
+
 const Register = () => {
   const navigation = useNavigation();
   const [name, setName] = useState("");
@@ -46,13 +48,17 @@ const Register = () => {
         })
         .then((response) => {
           if (response) {
-            Toast.show({
-              type: "success",
-              text1: "Usuário cadastrado com sucesso!",
-              text2: "Faça login para iniciar a sessão!",
+            // Toast.show({
+            //   type: "success",
+            //   text1: "Usuário cadastrado com sucesso!",
+            //   text2: "Faça login para iniciar a sessão!",
+            // });
+            onDisplayNotification({
+              title: "Novo usuário!",
+              body: `${name} foi cadastrado com sucesso!`,
             });
           }
-          navigation.navigate(ROUTES.LOGIN)
+          navigation.navigate(ROUTES.LOGIN);
         })
         .catch((err) =>
           Toast.show({
@@ -109,7 +115,9 @@ const Register = () => {
             <Text style={styles.text}>Registar</Text>
           )}
         </TouchableOpacity>
-        <Text style={{ color: COLORS.primary }}>Voltar e fazer Login!</Text>
+        <TouchableOpacity onPress={() => navigation.navigate(ROUTES.LOGIN)}>
+          <Text style={{ color: COLORS.primary }}>Voltar e fazer Login!</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
