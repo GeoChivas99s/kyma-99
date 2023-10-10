@@ -18,7 +18,7 @@ const Reader = () => {
   const [data, setData] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [words, setWords] = useState<Record<string, string>>({});
-  const API_KEY = "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";
+  const API_KEY = "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";
 
   const [word, setWord] = useState<string>("");
   const addChip = (name: string, id: string) => {
@@ -63,7 +63,7 @@ const Reader = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data.choices[0].text);
+        // console.log('Teste',data);
         setData(data.choices[0].text);
       })
       .catch(() => Alert.alert("Erro", "Não foi possível Gerar o texto"))

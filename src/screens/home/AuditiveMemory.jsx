@@ -152,6 +152,15 @@ const AuditiveMemory = () => {
           // padding: 5,,
         }}
       >
+         <Text
+                    style={{
+                        textTransform: "uppercase",
+                        fontSize: 18,
+                        color: COLORS.white,
+                    }}
+                >
+                    Memória auditiva
+                </Text>
         <View style={styles.gameContainer}>
           <Text style={styles.title}>Terapia de Memória Auditiva</Text>
           {!isPlaying && (

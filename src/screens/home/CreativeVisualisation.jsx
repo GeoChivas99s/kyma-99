@@ -60,7 +60,7 @@ const CreativeVisualisation = () => {
       Speech.speak(currentScene, {
         language: "pt-PT",
         pitch: 1,
-        rate: 1,
+        rate: .8,
       });
     }
     return () => {

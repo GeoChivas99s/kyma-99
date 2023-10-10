@@ -3,20 +3,19 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
-  ActivityIndicator,
 } from "react-native";
 import { Audio } from "expo-av";
+import useData from "../../hooks/useData";
 import Svg, { Path } from "react-native-svg";
 import * as FileSystem from "expo-file-system";
+import Toast from "react-native-toast-message";
 import { COLORS, ROUTES } from "../../constants";
+import { analyzeTranscription } from "../../utils";
 import Icon from "react-native-vector-icons/Ionicons";
+import DiagnosticDialog from "../dialogs/diagnosticDialog";
 import React, { useCallback, useEffect, useState } from "react";
 import { InterruptionModeIOS, InterruptionModeAndroid } from "expo-av";
-import { analyzeTranscription } from "../../utils";
-import Toast from "react-native-toast-message";
-import DiagnosticDialog from "../dialogs/diagnosticDialog";
 
-import useData from "../../hooks/useData";
 
 const Fluency = () => {
   const [message, setMessage] = useState("");

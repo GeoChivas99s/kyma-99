@@ -8,18 +8,18 @@ import {
   Alert,
   ActivityIndicator,
 } from "react-native";
-import React, { useState, useEffect } from "react";
-import { COLORS, ROUTES } from "../../constants";
+import * as Speech from "expo-speech";
 import Svg, { Path } from "react-native-svg";
+import { COLORS, ROUTES } from "../../constants";
+import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 
-import * as Speech from "expo-speech";
 
 const TextGenerator = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState("");
 
-  const API_KEY = "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";
+  const API_KEY = "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";
 
   function handleFetchText() {
     setIsLoading(true);
@@ -44,7 +44,7 @@ const TextGenerator = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
+       //  console.log(data);
         setData(data?.choices[0]?.text);
       })
       .catch((err) => {Alert.alert("Erro", "Não foi possível Gerar o texto")
