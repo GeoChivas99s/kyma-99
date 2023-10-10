@@ -58,12 +58,12 @@ function BottomTabNavigator() {
       />
       <Tab.Screen
         name={ROUTES.NOTIFICATIONS}
-        component={Chat}
+        component={Notifications}
         options={{
           tabBarButton: props => <CustomTabBarButton {...props} />,
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name={ROUTES.SETTINGS_NAVIGATOR}
         component={SettingsNavigator}
         options={{
@@ -86,7 +86,7 @@ function BottomTabNavigator() {
             );
           },
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }
